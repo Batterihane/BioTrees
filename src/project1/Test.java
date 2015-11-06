@@ -9,4 +9,8 @@ public class Test {
 
         System.out.println("sup?");
     }
+
+    public static void main(String[] args) {
+        System.out.println("hej");
+    }
 }
