@@ -1,0 +1,39 @@
+package project1.RootedTree;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by Thomas on 11-11-2015.
+ */
+public class InternalNode implements Node {
+
+    private Node parent;
+    private List<Node> children;
+
+    public InternalNode(List<Node> children){
+        this.children = children;
+    }
+
+    public InternalNode(){
+        children = new ArrayList<>();
+    }
+
+    @Override
+    public Node getParent() {
+        return parent;
+    }
+
+    @Override
+    public void setParent(Node newParent){
+        parent = newParent;
+    }
+
+    public void addChild(Node newChild){
+        children.add(newChild);
+    }
+
+    public void setChildren(List<Node> children) {
+        this.children = children;
+    }
+}
