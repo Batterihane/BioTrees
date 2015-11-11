@@ -36,4 +36,13 @@ public class InternalNode implements Node {
     public void setChildren(List<Node> children) {
         this.children = children;
     }
+
+    @Override
+    public List<String> getLeafNamesDepthFirst(){
+        List<String> result = new ArrayList<>();
+        for(Node child : children){
+            result.addAll(child.getLeafNamesDepthFirst());
+        }
+        return result;
+    }
 }

@@ -20,12 +20,23 @@ public class Rooter {
     public static void main(String[] args) throws FileNotFoundException, ParseException {
         NewickParser parser = new NewickParser(new FileInputStream(new File("trees//test.new")));
         Node tree = rootTree(parser.tree());
+        System.out.println("asdf");
+    }
+
+    private static TreeNode findRootNode(TreeNode tree){
+        TreeNode currentNode = tree;
+        TreeNode child = currentNode.getChildren().get(0);
+        while (!child.getChildren().isEmpty()){
+            currentNode = child;
+            child = child.getChildren().get(0);
+        }
+        return currentNode;
     }
 
     public static Node rootTree(TreeNode tree){
-        TreeNode root = tree.getLeaves().get(0);
-        List<TreeNode> children = root.getChildren().get(0).getChildren();
-        children.remove(root);
+        TreeNode root = findRootNode(tree);
+        List<TreeNode> children = root.getChildren();
+        children.remove(0);
 
         InternalNode result = new InternalNode();
         List<Node> rootedChildren = new ArrayList<>();
@@ -44,7 +55,7 @@ public class Rooter {
         children.remove(parent);
 
         if(children.isEmpty()){
-            Leaf resultNode = new Leaf(parent.getName());
+            Leaf resultNode = new Leaf(subTree.getName());
             return resultNode;
         }
 

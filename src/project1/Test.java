@@ -31,7 +31,7 @@ public class Test {
         String nhx = "(mammal,(turtle,rayfinfish,(frog,salamander)))";
         Phylogeny phylogeny = new Phylogeny();
 
-        final File treefile = new File("C:\\Users\\Nikolaj\\BioTreeAndSeq\\BioTrees\\trees\\quickTree\\testnewick.new");
+        final File treefile = new File("trees//test.new");
         PhylogenyParser parserDependingOnFileType = ParserUtils.createParserDependingOnFileType(treefile, true);
 
         Phylogeny[] phys = null;
@@ -56,8 +56,10 @@ public class Test {
         }
 */
 
-        List<PhylogenyNode> allDescendants = tree.getNode(0).getAllDescendants();
-        allDescendants.forEach(node -> System.out.println(node.getName()));
+        List<PhylogenyNode> allDescendants = tree.getNode(0).getDescendants();
+        allDescendants.forEach(node ->
+                System.out.println(node.getNumberOfDescendants())
+        );
         MainFrame application = Archaeopteryx.createApplication(tree);
 
     }
