@@ -48,7 +48,7 @@ public class NewickPrep {
                     || !inquotes && c1==','&&c2!='('
                     )
             {
-                output += '"';
+                output += '\'';
                 inquotes = !inquotes;}
 
             cur1 = cur2;
