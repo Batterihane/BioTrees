@@ -17,6 +17,7 @@ public class DayAlgorithm {
     private final Rooter rooter;
     private List<Pair<Integer, Integer>> treeIntervalList;
     private HashMap<String, Integer> nameMapping;
+    private int numberOfLeaves;
 
     public DayAlgorithm(Phylogeny phylogenyTree1, Phylogeny phylogenyTree2){
         rooter = new Rooter();
@@ -61,7 +62,7 @@ public class DayAlgorithm {
     }
 
 //    private int step5(Pair<List<Pair<Integer, Integer>>, List<Pair<Integer, Integer>>> intervalLists){
-//
+//        List<Pair<Integer, Integer>> sortedIntervals = IntervalRadixSorter.sortList(intervalLists.getLeft().addAll(intervalLists.getRight()), )
 //    }
 
     private Pair<Pair<Integer, Integer>, Integer> getIntervalAndUpdateIntervalList(Node node, boolean isFirstTree){
