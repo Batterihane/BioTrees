@@ -34,9 +34,10 @@ public class Rooter {
             root = findRootNode(tree);
         else
             root = tree.getNode(rootLeaf).getParent();
-        List<PhylogenyNode> children = root.getDescendants();
-        children.remove(0);
 
+        List<PhylogenyNode> children = root.getDescendants();
+
+        children.stream().filter(c -> !c.getName().equals(rootLeaf));
 
         PhylogenyNode phylogenyParent = root.getParent();
         if(phylogenyParent != null)
