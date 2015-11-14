@@ -17,7 +17,6 @@ public class DayAlgorithm {
     private final Rooter rooter;
     private List<Pair<Integer, Integer>> treeIntervalList;
     private HashMap<String, Integer> nameMapping;
-    private int numberOfLeaves;
 
     public DayAlgorithm(Phylogeny phylogenyTree1, Phylogeny phylogenyTree2){
         rooter = new Rooter();
@@ -25,12 +24,14 @@ public class DayAlgorithm {
         this.phylogenyTree2 = phylogenyTree2;
     }
 
-//    public int getSplitDistance(){
-//        Pair<Node, Node> rootedTrees = step1();
+    public int getSplitDistance(){
+        Pair<Node, Node> rootedTrees = step1();
 //        step2and3(rootedTrees.getLeft());
 //        Pair<List<Pair<Integer, Integer>>, List<Pair<Integer, Integer>>> intervalLists = step4(rootedTrees.getLeft(), rootedTrees.getRight());
-//
-//    }
+//        int result = step5(intervalLists, rootedTrees.getLeft().countLeaves());
+//        return result;
+        return 0;
+    }
 
     private Pair<Node, Node> step1(){
         Pair<Node, Node> result;
@@ -61,9 +62,21 @@ public class DayAlgorithm {
         return new Pair<>(intervalList1, intervalList2);
     }
 
-//    private int step5(Pair<List<Pair<Integer, Integer>>, List<Pair<Integer, Integer>>> intervalLists){
-//        List<Pair<Integer, Integer>> sortedIntervals = IntervalRadixSorter.sortList(intervalLists.getLeft().addAll(intervalLists.getRight()), )
-//    }
+    private int step5(Pair<List<Pair<Integer, Integer>>, List<Pair<Integer, Integer>>> intervalLists, int numberOfLeaves){
+        List<Pair<Integer, Integer>> combinedIntervalList = intervalLists.getLeft();
+        combinedIntervalList.addAll(intervalLists.getRight());
+        List<Pair<Integer, Integer>> sortedIntervals = IntervalRadixSorter.sortList(combinedIntervalList, numberOfLeaves);
+        for (int i = 0; i < sortedIntervals.size()-1; i++) {
+            Pair<Integer, Integer> firstInterval = sortedIntervals.get(i);
+            Pair<Integer, Integer> secondInterval = sortedIntervals.get(i + 1);
+            if(firstInterval.getLeft() != -1 && firstInterval.compareWithInterval(secondInterval)){
+                sortedIntervals.remove(i+1);
+                sortedIntervals.remove(i);
+                i--;
+            }
+        }
+        return combinedIntervalList.size();
+    }
 
     private Pair<Pair<Integer, Integer>, Integer> getIntervalAndUpdateIntervalList(Node node, boolean isFirstTree){
         int lower = Integer.MAX_VALUE;

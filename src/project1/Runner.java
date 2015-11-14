@@ -9,11 +9,15 @@ import project1.RootedTree.Node;
 public class Runner {
     public static void main(String[] args) {
         ForesterNewickParser parser = new ForesterNewickParser();
-        Phylogeny phylogenyTree1 = parser.parseNewickFile("trees//quickTree//kalign.new");
-        Phylogeny phylogenyTree2 = parser.parseNewickFile("trees//rapidnj//kalign.new");
+
+        Phylogeny phylogenyTree1 = parser.parseNewickFile("trees//test.new");
+        Phylogeny phylogenyTree2 = parser.parseNewickFile("trees//test.new");
+//
+//        Phylogeny phylogenyTree1 = parser.parseNewickFile("trees//quickTree//kalign.new");
+//        Phylogeny phylogenyTree2 = parser.parseNewickFile("trees//rapidnj//kalign.new");
 
         DayAlgorithm dayAlgorithm = new DayAlgorithm(phylogenyTree1, phylogenyTree2);
-        //dayAlgorithm
+        System.out.println(dayAlgorithm.getSplitDistance());
 
 
         Rooter rooter = new Rooter();
