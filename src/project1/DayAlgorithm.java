@@ -26,11 +26,10 @@ public class DayAlgorithm {
 
     public int getSplitDistance(){
         Pair<Node, Node> rootedTrees = step1();
-//        step2and3(rootedTrees.getLeft());
-//        Pair<List<Pair<Integer, Integer>>, List<Pair<Integer, Integer>>> intervalLists = step4(rootedTrees.getLeft(), rootedTrees.getRight());
-//        int result = step5(intervalLists, rootedTrees.getLeft().countLeaves());
-//        return result;
-        return 0;
+        step2and3(rootedTrees.getLeft());
+        Pair<List<Pair<Integer, Integer>>, List<Pair<Integer, Integer>>> intervalLists = step4(rootedTrees.getLeft(), rootedTrees.getRight());
+        int result = step5(intervalLists, rootedTrees.getLeft().countLeaves());
+        return result;
     }
 
     private Pair<Node, Node> step1(){
@@ -66,16 +65,16 @@ public class DayAlgorithm {
         List<Pair<Integer, Integer>> combinedIntervalList = intervalLists.getLeft();
         combinedIntervalList.addAll(intervalLists.getRight());
         List<Pair<Integer, Integer>> sortedIntervals = IntervalRadixSorter.sortList(combinedIntervalList, numberOfLeaves);
+        List<Pair<Integer, Integer>> listofthingstoreturn = new ArrayList<>();
+
         for (int i = 0; i < sortedIntervals.size()-1; i++) {
             Pair<Integer, Integer> firstInterval = sortedIntervals.get(i);
             Pair<Integer, Integer> secondInterval = sortedIntervals.get(i + 1);
-            if(firstInterval.getLeft() != -1 && firstInterval.compareWithInterval(secondInterval)){
-                sortedIntervals.remove(i+1);
-                sortedIntervals.remove(i);
-                i--;
-            }
+            if(firstInterval.getLeft() == -1 || !firstInterval.compareWithInterval(secondInterval)){
+                listofthingstoreturn.add(firstInterval);
+            }else{i++;}
         }
-        return combinedIntervalList.size();
+        return listofthingstoreturn.size();
     }
 
     private Pair<Pair<Integer, Integer>, Integer> getIntervalAndUpdateIntervalList(Node node, boolean isFirstTree){

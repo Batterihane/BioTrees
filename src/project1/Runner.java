@@ -3,6 +3,8 @@ package project1;
 import org.forester.phylogeny.Phylogeny;
 import project1.RootedTree.Node;
 
+import java.util.Arrays;
+
 /**
  * Created by Thomas on 14-11-2015.
  */
@@ -21,9 +23,9 @@ public class Runner {
 
 
         Rooter rooter = new Rooter();
+        int[] myArray = new int[10];
+        Arrays.fill(myArray, 0);
         Node tree1 = rooter.rootTrees(phylogenyTree1);
         Node tree2 = rooter.rootTrees(phylogenyTree2);
-        System.out.println(tree2.countLeaves());
-        System.out.println(tree1.getLeafNamesDepthFirst().containsAll(tree2.getLeafNamesDepthFirst()));
     }
 }
