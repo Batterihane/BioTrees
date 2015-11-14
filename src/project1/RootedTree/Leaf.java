@@ -33,6 +33,11 @@ public class Leaf implements Node {
         return result;
     }
 
+    @Override
+    public int countLeaves() {
+        return 1;
+    }
+
     public String getName() {
         return name;
     }
