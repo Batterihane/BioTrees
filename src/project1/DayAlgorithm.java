@@ -67,8 +67,12 @@ public class DayAlgorithm {
         List<Pair<Integer, Integer>> sortedIntervals = IntervalRadixSorter.sortList(combinedIntervalList, numberOfLeaves);
         List<Pair<Integer, Integer>> listofthingstoreturn = new ArrayList<>();
 
-        for (int i = 0; i < sortedIntervals.size()-1; i++) {
+        for (int i = 0; i < sortedIntervals.size(); i++) {
             Pair<Integer, Integer> firstInterval = sortedIntervals.get(i);
+            if(i+1 == sortedIntervals.size()){
+                listofthingstoreturn.add(firstInterval);
+                return listofthingstoreturn.size();
+            }
             Pair<Integer, Integer> secondInterval = sortedIntervals.get(i + 1);
             if(firstInterval.getLeft() == -1 || !firstInterval.compareWithInterval(secondInterval)){
                 listofthingstoreturn.add(firstInterval);

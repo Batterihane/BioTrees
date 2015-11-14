@@ -15,8 +15,8 @@ public class Runner {
 //        Phylogeny phylogenyTree1 = parser.parseNewickFile("trees//test//tree1.new");
 //        Phylogeny phylogenyTree2 = parser.parseNewickFile("trees//test//tree2.new");
 
-        Phylogeny phylogenyTree1 = parser.parseNewickFile("trees//quickTree//permuted-mafft.new");
-        Phylogeny phylogenyTree2 = parser.parseNewickFile("trees//rapidnj//permuted-mafft.new");
+        Phylogeny phylogenyTree1 = parser.parseNewickFile("trees//quickTree//permuted-kalign.new");
+        Phylogeny phylogenyTree2 = parser.parseNewickFile("trees//rapidnj//permuted-kalign.new");
 
         DayAlgorithm dayAlgorithm = new DayAlgorithm(phylogenyTree1, phylogenyTree2);
         System.out.println(dayAlgorithm.getSplitDistance());
