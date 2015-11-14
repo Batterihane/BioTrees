@@ -19,4 +19,8 @@ public class Pair<T, S> {
     public S getRight() {
         return right;
     }
+
+    public boolean compareWithInterval(Pair<T, S> other){
+        return left == other.getLeft() && right == other.getRight();
+    }
 }
