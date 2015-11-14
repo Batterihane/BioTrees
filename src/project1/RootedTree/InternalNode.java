@@ -45,4 +45,18 @@ public class InternalNode implements Node {
         }
         return result;
     }
+
+    @Override
+    public int countLeaves() {
+        int result = 0;
+        for(Node child : children){
+            result += child.countLeaves();
+        }
+        return result;
+    }
+
+    @Override
+    public List<Node> getChildren() {
+        return children;
+    }
 }

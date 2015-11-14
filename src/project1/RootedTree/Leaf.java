@@ -33,6 +33,16 @@ public class Leaf implements Node {
         return result;
     }
 
+    @Override
+    public int countLeaves() {
+        return 1;
+    }
+
+    @Override
+    public List<Node> getChildren() {
+        return null;
+    }
+
     public String getName() {
         return name;
     }

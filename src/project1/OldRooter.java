@@ -1,12 +1,15 @@
 package project1;
 
+import newick.NewickParser;
+import newick.NewickParser.*;
 import newick.ParseException;
-import org.forester.phylogeny.Phylogeny;
-import org.forester.phylogeny.PhylogenyNode;
 import project1.RootedTree.InternalNode;
 import project1.RootedTree.Leaf;
 import project1.RootedTree.Node;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,33 +17,33 @@ import java.util.List;
 /**
  * Created by Thomas on 11-11-2015.
  */
-public class Rooter {
-    private String rootLeaf;
+public class OldRooter {
+    public static void main(String[] args) throws IOException, ParseException {
+        //NewickParser parser = new NewickParser(new NewickPrep().prep("trees//quickTree//mafft.new"));
+        NewickParser parser = new NewickParser(new FileInputStream(new File("trees//test.new")));
+        Node tree = rootTree(parser.tree());
+        System.out.println(tree.countLeaves());
+        tree.getLeafNamesDepthFirst().forEach(System.out::println);
+    }
 
-    private PhylogenyNode findRootNode(Phylogeny tree){
-        PhylogenyNode currentNode = tree.getRoot();
-        PhylogenyNode child = currentNode.getDescendants().get(0);
-        while (!child.getDescendants().isEmpty()){
+    private static TreeNode findRootNode(TreeNode tree){
+        TreeNode currentNode = tree;
+        TreeNode child = currentNode.getChildren().get(0);
+        while (!child.getChildren().isEmpty()){
             currentNode = child;
-            child = child.getDescendants().get(0);
+            child = child.getChildren().get(0);
         }
-        rootLeaf = child.getName();
         return currentNode;
     }
 
-    public Node rootTrees(Phylogeny tree){
-        PhylogenyNode root;
-        if(rootLeaf == null)
-            root = findRootNode(tree);
-        else
-            root = tree.getNode(rootLeaf).getParent();
-        List<PhylogenyNode> children = root.getDescendants();
+    public static Node rootTree(TreeNode tree){
+        TreeNode root = findRootNode(tree);
+        List<TreeNode> children = root.getChildren();
         children.remove(0);
-        children.add(root.getParent());
 
         InternalNode result = new InternalNode();
         List<Node> rootedChildren = new ArrayList<>();
-        for(PhylogenyNode child : children){
+        for(TreeNode child : children){
             Node rootedChild = rootSubTree(child, root);
             rootedChild.setParent(result);
             rootedChildren.add(rootedChild);
@@ -50,11 +53,8 @@ public class Rooter {
         return result;
     }
 
-    private Node rootSubTree(PhylogenyNode subTree, PhylogenyNode parent){
-        List<PhylogenyNode> children = subTree.getDescendants();
-        PhylogenyNode phylogenyParent = subTree.getParent();
-        if(phylogenyParent != null)
-            children.add(phylogenyParent);
+    private static Node rootSubTree(TreeNode subTree, TreeNode parent){
+        List<TreeNode> children = subTree.getChildren();
         children.remove(parent);
 
         if(children.isEmpty()){
@@ -64,7 +64,7 @@ public class Rooter {
 
         InternalNode resultNode = new InternalNode();
         List<Node> rootedChildren = new ArrayList<>();
-        for(PhylogenyNode child : children){
+        for(TreeNode child : children){
             Node rootedChild = rootSubTree(child, subTree);
             rootedChild.setParent(resultNode);
             rootedChildren.add(rootedChild);

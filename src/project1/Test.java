@@ -19,49 +19,8 @@ import java.util.List;
 
 public class Test {
 
-    static void SupNoobs(){
-
-        System.out.println("sup?");
-    }
-
-
-
-
     public static void main(String[] args) throws IOException{
-        String nhx = "(mammal,(turtle,rayfinfish,(frog,salamander)))";
-        Phylogeny phylogeny = new Phylogeny();
-
-        final File treefile = new File("trees//test.new");
-        PhylogenyParser parserDependingOnFileType = ParserUtils.createParserDependingOnFileType(treefile, true);
-
-        Phylogeny[] phys = null;
-        try {
-            phys = PhylogenyMethods.readPhylogenies(parserDependingOnFileType, treefile);
-        }
-        catch ( final IOException e ) {
-            e.printStackTrace();
-        }
-        //org.forester.phylogeny.Phylogeny.class.newInstance().
-        //Phylogeny ph = org.forester.phylogeny.Phylogeny.class.newInstance().
-        Phylogeny tree = phys[0];
-        PhylogenyNode root = tree.getRoot();
-        System.out.println(tree.isRerootable());
-        //tree.reRoot(tree.getNode(0));
-        //tree.reRoot(tree.getNode("turtle"));
-        PhylogenyNodeIterator phylogenyNodeIterator = tree.iteratorPreorder();
-
-/*
-        while(phylogenyNodeIterator.hasNext()) {
-            System.out.println(phylogenyNodeIterator.next().toString());
-        }
-*/
-
-        List<PhylogenyNode> allDescendants = tree.getNode(0).getDescendants();
-        allDescendants.forEach(node ->
-                System.out.println(node.getNumberOfDescendants())
-        );
-        MainFrame application = Archaeopteryx.createApplication(tree);
-
+        /* TESTS */
     }
 
 }
