@@ -37,7 +37,10 @@ public class Rooter {
         List<PhylogenyNode> children = root.getDescendants();
         children.remove(0);
 
-        children.add(root.getParent());
+
+        PhylogenyNode phylogenyParent = root.getParent();
+        if(phylogenyParent != null)
+            children.add(phylogenyParent);
 
         InternalNode result = new InternalNode();
         List<Node> rootedChildren = new ArrayList<>();
