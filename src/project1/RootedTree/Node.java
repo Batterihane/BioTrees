@@ -10,4 +10,5 @@ public interface Node {
     void setParent(Node newParent);
     List<String> getLeafNamesDepthFirst();
     int countLeaves();
+    List<Node> getChildren();
 }

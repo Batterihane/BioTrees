@@ -38,6 +38,11 @@ public class Leaf implements Node {
         return 1;
     }
 
+    @Override
+    public List<Node> getChildren() {
+        return null;
+    }
+
     public String getName() {
         return name;
     }

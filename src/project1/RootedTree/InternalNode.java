@@ -54,4 +54,9 @@ public class InternalNode implements Node {
         }
         return result;
     }
+
+    @Override
+    public List<Node> getChildren() {
+        return children;
+    }
 }

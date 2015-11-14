@@ -11,6 +11,11 @@ public class Runner {
         ForesterNewickParser parser = new ForesterNewickParser();
         Phylogeny phylogenyTree1 = parser.parseNewickFile("trees//quickTree//kalign.new");
         Phylogeny phylogenyTree2 = parser.parseNewickFile("trees//rapidnj//kalign.new");
+
+        DayAlgorithm dayAlgorithm = new DayAlgorithm(phylogenyTree1, phylogenyTree2);
+        //dayAlgorithm
+
+
         Rooter rooter = new Rooter();
         Node tree1 = rooter.rootTrees(phylogenyTree1);
         Node tree2 = rooter.rootTrees(phylogenyTree2);
