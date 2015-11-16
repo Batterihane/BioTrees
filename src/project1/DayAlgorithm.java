@@ -20,8 +20,8 @@ public class DayAlgorithm {
 
     public DayAlgorithm(Phylogeny phylogenyTree1, Phylogeny phylogenyTree2){
         rooter = new Rooter();
-        this.phylogenyTree1 = phylogenyTree1;
-        this.phylogenyTree2 = phylogenyTree2;
+        this.phylogenyTree1 = phylogenyTree1.copy();
+        this.phylogenyTree2 = phylogenyTree2.copy();
     }
 
     public int getSplitDistance(){
