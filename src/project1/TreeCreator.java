@@ -23,7 +23,7 @@ public class TreeCreator {
         System.out.println(dayAlgorithm1.getSplitDistance());
     }
 
-    private static Phylogeny createTree(int size) {
+    public static Phylogeny createTree(int size) {
         Phylogeny tree = new Phylogeny();
         PhylogenyNode root = new PhylogenyNode();
         tree.setRoot(root);
