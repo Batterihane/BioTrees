@@ -41,7 +41,7 @@ public class NJAlgorithm {
             // Compute r list
             double[] r = new double[numberOfTaxa];
             for (int i = 0; i < numberOfTaxa; i++) {
-                int distanceSum = 0;
+                double distanceSum = 0;
                 List<Double> dissimilarityList = dissimilarities.get(i);
                 for (int j = 1; j < dissimilarityList.size(); j++) {
                     distanceSum += dissimilarityList.get(j);
@@ -137,32 +137,32 @@ public class NJAlgorithm {
 //            }
         }
         distances[0][0] = 0;
-        distances[0][1] = 2;
-        distances[1][0] = 2;
-        distances[0][2] = 3;
-        distances[2][0] = 3;
-        distances[0][3] = 4;
-        distances[3][0] = 4;
-        distances[0][4] = 4;
-        distances[4][0] = 4;
+        distances[0][1] = 0.23;
+        distances[1][0] = 0.23;
+        distances[0][2] = 0.16;
+        distances[2][0] = 0.16;
+        distances[0][3] = 0.20;
+        distances[3][0] = 0.20;
+        distances[0][4] = 0.17;
+        distances[4][0] = 0.17;
 
         distances[1][1] = 0;
-        distances[1][2] = 3;
-        distances[2][1] = 3;
-        distances[1][3] = 4;
-        distances[3][1] = 4;
-        distances[1][4] = 4;
-        distances[4][1] = 4;
+        distances[1][2] = 0.23;
+        distances[2][1] = 0.23;
+        distances[1][3] = 0.17;
+        distances[3][1] = 0.17;
+        distances[1][4] = 0.24;
+        distances[4][1] = 0.24;
 
         distances[2][2] = 0;
-        distances[2][3] = 3;
-        distances[3][2] = 3;
-        distances[2][4] = 3;
-        distances[4][2] = 3;
+        distances[2][3] = 0.20;
+        distances[3][2] = 0.20;
+        distances[2][4] = 0.11;
+        distances[4][2] = 0.11;
 
         distances[3][3] = 0;
-        distances[3][4] = 2;
-        distances[4][3] = 2;
+        distances[3][4] = 0.21;
+        distances[4][3] = 0.21;
 
         distances[4][4] = 0;
 
@@ -171,8 +171,8 @@ public class NJAlgorithm {
         NewickMaker nm = new NewickMaker(names,tree,7);
         String result = nm.make();
         System.out.println("RESULT\n" + result);
-        ForesterNewickParser np = new ForesterNewickParser();
-        Phylogeny p = np.parseNewickFile("distance_matrices//test.new");
-        np.displayPhylogeny(p);
+//        ForesterNewickParser np = new ForesterNewickParser();
+//        Phylogeny p = np.parseNewickFile("distance_matrices//test.new");
+//        np.displayPhylogeny(p);
     }
 }
