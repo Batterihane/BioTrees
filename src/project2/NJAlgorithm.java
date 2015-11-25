@@ -42,7 +42,7 @@ public class NJAlgorithm {
                 for (int j = 1; j < dissimilarityList.size(); j++) {
                     distanceSum += dissimilarityList.get(j);
                 }
-                r[i] = distanceSum / (numberOfTaxa-2);
+                r[i] = distanceSum / (double)(numberOfTaxa-2);
             }
 
             // Compute N matrix
@@ -70,11 +70,13 @@ public class NJAlgorithm {
 
             // Add new edges to tree
             int newNode = numberOfNodes;
-            double neighbourDistance = dissimilarities.get(neighbour1Position).get(neighbour2Position);
+            double neighbourDistance = dissimilarities.get(neighbour1Position).get(neighbour2Position+1);
             int neighbour1NamePos = dissimilarities.get(neighbour1Position).get(0).intValue();
             int neighbour2NamePos = dissimilarities.get(neighbour2Position).get(0).intValue();
-            tree.put(new IntPair(newNode, neighbour1NamePos), (neighbourDistance + r[neighbour1Position] - r[neighbour2Position]));
-            tree.put(new IntPair(newNode, neighbour2NamePos), (neighbourDistance + r[neighbour2Position] - r[neighbour1Position]));
+            double distance1 = (neighbourDistance + r[neighbour1Position] - r[neighbour2Position]) / 2;
+            double distance2 = (neighbourDistance + r[neighbour2Position] - r[neighbour1Position]) / 2;
+            tree.put(new IntPair(newNode, neighbour1NamePos), distance1);
+            tree.put(new IntPair(newNode, neighbour2NamePos), distance2);
             numberOfNodes++;
             System.out.println("(" + neighbour1NamePos + "," + neighbour2NamePos + "," + newNode + ")");
 
@@ -97,7 +99,11 @@ public class NJAlgorithm {
             dissimilarities.remove(neighbour2Position);
             for (int i = 0; i < dissimilarities.size(); i++) {
                 if(i == neighbour1Position) continue;
-                dissimilarities.get(i).set(neighbour1Position+1, newNodeDistances.get(i));
+                if(i < neighbour2Position){
+                    dissimilarities.get(i).set(neighbour1Position+1, newNodeDistances.get(i + 1));
+                    continue;
+                }
+                dissimilarities.get(i).set(neighbour1Position+1, newNodeDistances.get(i+2));
             }
             for (List<Double> l : dissimilarities){
                 l.remove(neighbour2Position+1);

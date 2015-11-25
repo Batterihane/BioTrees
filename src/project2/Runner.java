@@ -7,7 +7,7 @@ import java.io.IOException;
  */
 public class Runner {
     public static void main(String[] args) {
-        NewickMaker nm = new NewickMaker();
+        //NewickMaker nm = new NewickMaker();
 
         //nm.make();
     }
