@@ -1,5 +1,7 @@
 package project2;
 
+import sun.misc.Regexp;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,6 +12,7 @@ import java.io.IOException;
  */
 public class PhyllipParser{
     BufferedReader br;
+    final String delimiter = "   "; //hvad de bruger i phy filerne mellem tal
 
     public PhyllipParser(String filePath) {
         try {
@@ -24,11 +27,12 @@ public class PhyllipParser{
         double[][] res1=null;
         String[] res2=null;
         try {
-            int n = Integer.parseInt(br.readLine());
+            //System.out.println(br.readLine().trim());
+            int n = Integer.parseInt(br.readLine().trim());
             res1 = new double[n][n];
             res2 = new String[n];
             for (int i = 0; i < n; i++) {
-                String[] parts = br.readLine().split(" ");
+                String[] parts = br.readLine().split(delimiter);
 
                 res2[i] = parts[0];
 

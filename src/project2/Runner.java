@@ -7,7 +7,7 @@ import java.io.IOException;
  */
 public class Runner {
     public static void main(String[] args) {
-        PhyllipParser pp = new PhyllipParser("src//test.phy");
+        PhyllipParser pp = new PhyllipParser("distance_matrices//1849_FG-GAP.phy");
         Tuple<double[][], String[]> result=null;
 
         result = pp.parse();
