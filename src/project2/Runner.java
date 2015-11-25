@@ -7,23 +7,8 @@ import java.io.IOException;
  */
 public class Runner {
     public static void main(String[] args) {
-        PhyllipParser pp = new PhyllipParser("distance_matrices//1849_FG-GAP.phy");
-        Tuple<double[][], String[]> result=null;
+        NewickMaker nm = new NewickMaker();
 
-        result = pp.parse();
-        for(double[] da:result.getLeft()){
-            System.out.println("");
-        for (double d:da)
-              {System.out.print(d + " ");
-
-        }}
-        for (String s : result.getRight()){
-            System.out.println(s);
-
-        }
-
-        System.out.println(result.getLeft()[4][1]);
-        System.out.println(result.getRight()[3]);
-
+        //nm.make();
     }
 }

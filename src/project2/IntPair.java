@@ -39,4 +39,11 @@ public class IntPair {
     public int hashCode() {
         return 19319 * lower + higher;
     }
+    @Override
+    public String toString(){
+        return String.format("lower: %d, higher: %d",lower,higher);
+    }
+    public boolean has(int q){
+        return lower==q||higher==q;
+    }
 }
