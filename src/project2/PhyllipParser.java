@@ -13,7 +13,6 @@ import java.io.IOException;
 public class PhyllipParser{
     BufferedReader br;
     final String delimiter = "   "; //hvad de bruger i phy filerne mellem tal
-
     public PhyllipParser(String filePath) {
         try {
             br = new BufferedReader(new FileReader(filePath));
