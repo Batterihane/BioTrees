@@ -11,7 +11,16 @@ public class Runner {
         Tuple<double[][], String[]> result=null;
 
         result = pp.parse();
+        for(double[] da:result.getLeft()){
+            System.out.println("");
+        for (double d:da)
+              {System.out.print(d + " ");
 
+        }}
+        for (String s : result.getRight()){
+            System.out.println(s);
+
+        }
 
         System.out.println(result.getLeft()[4][1]);
         System.out.println(result.getRight()[3]);
