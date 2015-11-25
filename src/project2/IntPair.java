@@ -39,4 +39,11 @@ public class IntPair {
     public int hashCode() {
         return 19319 * lower + higher;
     }
+
+    @Override
+    public String toString() {
+        return "(" + lower +
+                ", " + higher +
+                ")";
+    }
 }
