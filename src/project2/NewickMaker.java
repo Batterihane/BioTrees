@@ -1,6 +1,8 @@
 package project2;
 
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.spi.LocaleServiceProvider;
 
 /**
  * Created by ballololz on 11/25/2015.
@@ -40,7 +42,7 @@ public class NewickMaker {
     }
     public String makeRec(int node, int fromNode){
         if (node < noOfLeaves){ //return leaf node
-            return String.format("'%s':%f",names[node],map.get(new IntPair(node, fromNode)));
+            return String.format(Locale.ENGLISH,"'%s':%f",names[node],map.get(new IntPair(node, fromNode)));
         }   //return internal node
 
         int count = 0;
@@ -56,6 +58,6 @@ public class NewickMaker {
 
         }
 
-        return String.format("(%s,%s):%f",makeRec(otherNodes[0],node),makeRec(otherNodes[1],node),map.get(new IntPair(node, fromNode)));
+        return String.format(Locale.ENGLISH,"(%s,%s):%f",makeRec(otherNodes[0],node),makeRec(otherNodes[1],node),map.get(new IntPair(node, fromNode)));
     }
 }
