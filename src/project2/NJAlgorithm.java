@@ -1,5 +1,6 @@
 package project2;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class NJAlgorithm {
                 r[i] = distanceSum / (double)(numberOfTaxa-2);
             }
 
-            // Compute N matrix
+            // Compute N matrixT
             double[][] approxDistances = new double[numberOfTaxa][numberOfTaxa];
             for (int i = 0; i < numberOfTaxa; i++) {
                 for (int j = 0; j < numberOfTaxa; j++) {
@@ -163,8 +164,6 @@ public class NJAlgorithm {
         distances[4][4] = 0;
 
         HashMap<IntPair, Double> tree = new NJAlgorithm().run(leaves, distances);
-        for(IntPair p: tree.keySet()){
-            System.out.println(p + "; " + tree.get(p));
-        }
+        NewickMaker nm = new NewickMaker(tree);
     }
 }
