@@ -37,7 +37,7 @@ public class stepOneWorker implements Runnable
     {
         switch (command) {
             case "R":
-                Double R = computeR(i);
+                Double R = computeR(i, numberOfTaxa);
                 //insert somewhere
                 break;
             case "N":
@@ -65,7 +65,5 @@ public class stepOneWorker implements Runnable
     public Double computeN(int i, int j) {
         return null;
     }
-
-
 
 }
