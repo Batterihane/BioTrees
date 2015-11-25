@@ -15,10 +15,11 @@ public class NewickMaker {
 
 
 
-    public NewickMaker(String[] names,HashMap<IntPair, Double> map){
+    public NewickMaker(String[] names,HashMap<IntPair, Double> map, int startNode){
         this.names = names;
         noOfLeaves = names.length;
         this.map=map;
+        this.startNode= startNode;
     }
 
     public String make(){
@@ -39,7 +40,7 @@ public class NewickMaker {
     }
     public String makeRec(int node, int fromNode){
         if (node < noOfLeaves){ //return leaf node
-            return String.format("'%s':%d",names[node],map.get(new IntPair(node, fromNode)));
+            return String.format("'%s':%f",names[node],map.get(new IntPair(node, fromNode)));
         }   //return internal node
 
         int count = 0;
@@ -55,6 +56,6 @@ public class NewickMaker {
 
         }
 
-        return String.format("(%s,%s):%d",makeRec(otherNodes[0],node),makeRec(otherNodes[1],node),map.get(new IntPair(node, fromNode)));
+        return String.format("(%s,%s):%f",makeRec(otherNodes[0],node),makeRec(otherNodes[1],node),map.get(new IntPair(node, fromNode)));
     }
 }

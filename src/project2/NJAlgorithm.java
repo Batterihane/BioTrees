@@ -1,6 +1,9 @@
 package project2;
 
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import newick.NewickParser;
+import org.forester.phylogeny.Phylogeny;
+import project1.ForesterNewickParser;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
@@ -164,6 +167,12 @@ public class NJAlgorithm {
         distances[4][4] = 0;
 
         HashMap<IntPair, Double> tree = new NJAlgorithm().run(leaves, distances);
-        NewickMaker nm = new NewickMaker(tree);
+        String[] names = {"A","B","C","D","E"};
+        NewickMaker nm = new NewickMaker(names,tree,7);
+        String result = nm.make();
+        System.out.println("RESULT\n" + result);
+        ForesterNewickParser np = new ForesterNewickParser();
+        Phylogeny p = np.parseNewickFile("distance_matrices//test.new");
+        np.displayPhylogeny(p);
     }
 }
