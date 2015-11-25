@@ -1,5 +1,7 @@
 package project2;
 
+import java.util.ArrayList;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
 
 /**
@@ -10,10 +12,11 @@ public class stepOneWorker implements Runnable
     private int i;
     private int j;
     private List<Double> dissimilarityList;
-    private Double[][] dissimilarities;
+    private int numberOfTaxa;
+    private List<List<Double>> dissimilarities;
     private String command;
 
-    public stepOneWorker(int i, int j, Double[][] dissimilarities)
+    public stepOneWorker(int i, int j, List<List<Double>> dissimilarities)
     {
         this.i = i;
         this.j = j;
@@ -21,10 +24,11 @@ public class stepOneWorker implements Runnable
         command = "N";
     }
 
-    public stepOneWorker(int i, List<Double> dissimilarityList)
+    public stepOneWorker(int i, List<Double> dissimilarityList, int numberOfTaxa)
     {
         this.i = i;
         this.dissimilarityList = dissimilarityList;
+        this.numberOfTaxa = numberOfTaxa;
         command = "R";
     }
 
@@ -45,8 +49,17 @@ public class stepOneWorker implements Runnable
         //Compute n_ij, and insert into dissimilarities (handle racing conditions through locks)
     }
 
-    public Double computeR(int i) {
-        return null;
+    public Double computeR(int i, int numberOfTaxa) {
+        Double result;
+        int distanceSum = 0;
+        List<Double> dissimilarityList = dissimilarities.get(i);
+
+        for (int j = 1; j < dissimilarityList.size(); j++) {
+            distanceSum += dissimilarityList.get(j);
+        }
+        result = distanceSum / (double)(numberOfTaxa-2);
+
+        return result;
     }
 
     public Double computeN(int i, int j) {
