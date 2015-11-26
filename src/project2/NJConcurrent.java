@@ -80,8 +80,8 @@ public class NJConcurrent
             }
 
             while (rCounter != numberOfTaxa) {
-                System.out.println("rc: " + rCounter);
-                System.out.println("numTax: " + numberOfTaxa);
+//                System.out.println("rc: " + rCounter);
+//                System.out.println("numTax: " + numberOfTaxa);
                 Thread.yield();
             }
 
@@ -161,9 +161,6 @@ public class NJConcurrent
         tree.put(new IntPair(newNode, dissimilarities.get(1).get(0).intValue()), (distance01+distance12-distance02)/2);
         tree.put(new IntPair(newNode, dissimilarities.get(2).get(0).intValue()), (distance02+distance12-distance01)/2);
 
-        NewickMaker newickMaker = new NewickMaker(leaves, tree, newNode);
-        System.out.println(newickMaker.make());
-
         return tree;
     }
 
@@ -210,7 +207,7 @@ public class NJConcurrent
         long first = System.currentTimeMillis();
         HashMap<IntPair, Double> tree = new NJConcurrent().run(leaves, distances);
         String[] names = {"A","B","C","D","E"};
-        NewickMaker nm = new NewickMaker(names,tree,7);
+        NewickMaker nm = new NewickMaker(names,tree);
         String result = nm.make();
         long second = System.currentTimeMillis();
         System.out.println("RESULT\n" + result + " - Time: " + (second-first));

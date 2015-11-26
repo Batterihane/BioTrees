@@ -9,7 +9,6 @@ import java.util.spi.LocaleServiceProvider;
  */
 public class NewickMaker {
 
-    int startNode;
     int noOfLeaves; //antal leaf nodes
     HashMap<IntPair, Double> map;
     String[] names;
@@ -17,14 +16,17 @@ public class NewickMaker {
 
 
 
-    public NewickMaker(String[] names,HashMap<IntPair, Double> map, int startNode){
+    public NewickMaker(String[] names,HashMap<IntPair, Double> map){
         this.names = names;
         noOfLeaves = names.length;
         this.map=map;
-        this.startNode= startNode;
     }
 
     public String make(){
+        return makeFromStartNode(names.length);
+    }
+
+    public String makeFromStartNode(int startNode){
 
         int count = 0;
         int otherNodes[] = new int[3];
@@ -37,8 +39,8 @@ public class NewickMaker {
             }
 
         }
-        System.out.println(count==3 ? "count is 3. Awesome":"count is not 3, something is probably wrong");
-        return String.format("(%s,%s,%s)",makeRec(otherNodes[0],startNode),makeRec(otherNodes[1],startNode),makeRec(otherNodes[2],startNode));
+//        System.out.println(count==3 ? "count is 3. Awesome":"count is not 3, something is probably wrong");
+        return String.format("(%s,%s,%s)",makeRec(otherNodes[0],startNode),makeRec(otherNodes[1],startNode),makeRec(otherNodes[2],startNode)) + ";";
     }
     public String makeRec(int node, int fromNode){
         if (node < noOfLeaves){ //return leaf node

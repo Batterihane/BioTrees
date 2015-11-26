@@ -1,16 +1,8 @@
 package project2;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import newick.NewickParser;
-import org.forester.phylogeny.Phylogeny;
-import project1.ForesterNewickParser;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.DoubleStream;
-import java.util.stream.IntStream;
 
 public class NJAlgorithm {
 
@@ -122,9 +114,6 @@ public class NJAlgorithm {
         tree.put(new IntPair(newNode, dissimilarities.get(1).get(0).intValue()), (distance01+distance12-distance02)/2);
         tree.put(new IntPair(newNode, dissimilarities.get(2).get(0).intValue()), (distance02+distance12-distance01)/2);
 
-        NewickMaker newickMaker = new NewickMaker(leaves, tree, newNode);
-        System.out.println(newickMaker.make());
-
         return tree;
     }
 
@@ -170,8 +159,8 @@ public class NJAlgorithm {
 
         HashMap<IntPair, Double> tree = new NJAlgorithm().run(leaves, distances);
         String[] names = {"A","B","C","D","E"};
-        NewickMaker nm = new NewickMaker(names,tree,7);
-        String result = nm.make();
+        NewickMaker nm = new NewickMaker(names,tree);
+        String result = nm.makeFromStartNode(7);
         System.out.println("RESULT\n" + result);
 //        ForesterNewickParser np = new ForesterNewickParser();
 //        Phylogeny p = np.parseNewickFile("distance_matrices//test.new");

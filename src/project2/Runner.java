@@ -3,14 +3,55 @@ package project2;
 import org.forester.phylogeny.Phylogeny;
 import project1.ForesterNewickParser;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 /**
  * Created by ballololz on 11/19/2015.
  */
 public class Runner {
-    public static void main(String[] args) {
+
+    public static final String MATRICES_PATH = "project2//distance_matrices//";
+    public static final String TREES_PATH = "project2//trees//";
+
+    public static void runNJAlgorithm() throws IOException {
+        Files.walk(Paths.get(MATRICES_PATH)).forEach(filepath -> {
+            if (!filepath.getFileName().toString().equals("distance_matrices")){
+                PhyllipParser parser = new PhyllipParser(filepath.toString());
+                Tuple<double[][], String[]> phyllip = parser.parse();
+
+                long time = System.nanoTime();
+                HashMap<IntPair, Double> tree = new NJConcurrent().run(phyllip.getRight(), phyllip.getLeft());
+                System.out.println(filepath.getFileName().toString() + ": " + (System.nanoTime() - time) + " ns");
+
+                NewickMaker newickMaker = new NewickMaker(phyllip.getRight(), tree);
+                String newickTree = newickMaker.make();
+                try {
+                    NewickWriter newickWriter = new NewickWriter(TREES_PATH + filepath.getFileName().toString().replaceFirst(".phy", ".new"));
+                    newickWriter.write(newickTree);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                };
+            }
+        });
+
+
+//        PhyllipParser parser = new PhyllipParser(MATRICES_PATH + "//1849_FG-GAP.phy");
+//        Tuple<double[][], String[]> phyllip = parser.parse();
+//        HashMap<IntPair, Double> tree = new NJAlgorithm().run(phyllip.getRight(), phyllip.getLeft());
+//        NewickMaker newickMaker = new NewickMaker(phyllip.getRight(), tree);
+//        String newickTree = newickMaker.make();
+//        NewickWriter newickWriter = new NewickWriter(TREES_PATH + "1849_FG-GAP.new");
+//        newickWriter.write(newickTree);
+    }
+
+    public static void main(String[] args) throws IOException {
+        runNJAlgorithm();
+
 //        String[] leaves = new String[5];
 //        double[][] distances = new double[5][5];
 //
@@ -50,19 +91,20 @@ public class Runner {
 //
 //        distances[4][4] = 0;
 
-        PhyllipParser parser = new PhyllipParser("distance_matrices//1849_FG-GAP.phy");
-        Tuple<double[][], String[]> phyllip = parser.parse();
-
-
-        long first = System.currentTimeMillis();
-        HashMap<IntPair, Double> tree = new NJConcurrent().run(phyllip.getRight(), phyllip.getLeft());
-        long second = System.currentTimeMillis();
-
-        System.out.println("Time: " + (second-first));
+//        PhyllipParser parser = new PhyllipParser(MATRICES_PATH + "1849_FG-GAP.phy");
+//        Tuple<double[][], String[]> phyllip = parser.parse();
+//
+//
+//        HashMap<IntPair, Double> tree = new NJAlgorithm().run(phyllip.getRight(), phyllip.getLeft());
+//
+//        NewickMaker newickMaker = new NewickMaker(phyllip.getRight(), tree);
+//        String newickTree = newickMaker.make();
+//        NewickWriter newickWriter = new NewickWriter(TREES_PATH + "test");
+//        newickWriter.write(newickTree);
 
 //        String[] names = {"A","B","C","D","E"};
 //        NewickMaker nm = new NewickMaker(names,tree,7);
-//        String result = nm.make();
+//        String result = nm.makeFromStartNode();
 //        System.out.println("RESULT\n" + result);
 //        ForesterNewickParser np = new ForesterNewickParser();
 //        Phylogeny p = np.parseNewickFile("distance_matrices//test.new");
