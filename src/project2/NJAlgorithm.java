@@ -82,7 +82,6 @@ public class NJAlgorithm {
             tree.put(new IntPair(newNode, neighbour1NamePos), distance1);
             tree.put(new IntPair(newNode, neighbour2NamePos), distance2);
             numberOfNodes++;
-            System.out.println("(" + neighbour1NamePos + "," + neighbour2NamePos + "," + newNode + ")");
 
             // Update dissimilarity matrix
             ArrayList<Double> newNodeDistances = new ArrayList<>();
@@ -122,6 +121,9 @@ public class NJAlgorithm {
         tree.put(new IntPair(newNode, dissimilarities.get(0).get(0).intValue()), (distance01+distance02-distance12)/2);
         tree.put(new IntPair(newNode, dissimilarities.get(1).get(0).intValue()), (distance01+distance12-distance02)/2);
         tree.put(new IntPair(newNode, dissimilarities.get(2).get(0).intValue()), (distance02+distance12-distance01)/2);
+
+        NewickMaker newickMaker = new NewickMaker(leaves, tree, newNode);
+        System.out.println(newickMaker.make());
 
         return tree;
     }
