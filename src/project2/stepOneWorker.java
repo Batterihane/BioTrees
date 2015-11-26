@@ -15,21 +15,24 @@ public class stepOneWorker implements Runnable
     private int numberOfTaxa;
     private List<List<Double>> dissimilarities;
     private String command;
+    NJConcurrent instance;
 
-    public stepOneWorker(int i, int j, List<List<Double>> dissimilarities)
+    public stepOneWorker(int i, int j, List<List<Double>> dissimilarities, NJConcurrent instance)
     {
         this.i = i;
         this.j = j;
         this.dissimilarities = dissimilarities;
         command = "N";
+        this.instance = instance;
     }
 
-    public stepOneWorker(int i, List<Double> dissimilarityList, int numberOfTaxa)
+    public stepOneWorker(int i, List<Double> dissimilarityList, int numberOfTaxa, NJConcurrent instance)
     {
         this.i = i;
         this.dissimilarityList = dissimilarityList;
         this.numberOfTaxa = numberOfTaxa;
         command = "R";
+        this.instance = instance;
     }
 
     @Override
@@ -37,23 +40,20 @@ public class stepOneWorker implements Runnable
     {
         switch (command) {
             case "R":
-                Double R = computeR(i, numberOfTaxa);
-                //insert somewhere
+                Double result = computeR(i, numberOfTaxa);
+                instance.addToRArray(i, result);
                 break;
             case "N":
                 Double N = computeN(i, j);
                 //insert somewhere
                 break;
         }
-
         //Compute n_ij, and insert into dissimilarities (handle racing conditions through locks)
     }
 
     public Double computeR(int i, int numberOfTaxa) {
         Double result;
-        int distanceSum = 0;
-        List<Double> dissimilarityList = dissimilarities.get(i);
-
+        double distanceSum = 0;
         for (int j = 1; j < dissimilarityList.size(); j++) {
             distanceSum += dissimilarityList.get(j);
         }

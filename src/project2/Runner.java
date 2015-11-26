@@ -54,7 +54,12 @@ public class Runner {
         Tuple<double[][], String[]> phyllip = parser.parse();
 
 
-        HashMap<IntPair, Double> tree = new NJAlgorithm().run(phyllip.getRight(), phyllip.getLeft());
+        long first = System.currentTimeMillis();
+        HashMap<IntPair, Double> tree = new NJConcurrent().run(phyllip.getRight(), phyllip.getLeft());
+        long second = System.currentTimeMillis();
+
+        System.out.println("Time: " + (second-first));
+
 //        String[] names = {"A","B","C","D","E"};
 //        NewickMaker nm = new NewickMaker(names,tree,7);
 //        String result = nm.make();
