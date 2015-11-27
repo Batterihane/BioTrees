@@ -10,6 +10,7 @@ import java.util.List;
 public class stepOneWorker implements Runnable
 {
     private int i;
+    private double[] distances;
     private int j;
     private List<Double> dissimilarityList;
     private int numberOfTaxa;
@@ -23,6 +24,15 @@ public class stepOneWorker implements Runnable
         this.j = j;
         this.dissimilarities = dissimilarities;
         command = "N";
+        this.instance = instance;
+    }
+
+    public stepOneWorker(int i, double[] distances, int numberOfTaxa, NJConcurrent instance)
+    {
+        this.i = i;
+        this.distances = distances;
+        this.numberOfTaxa = numberOfTaxa;
+        command = "FindNeighbors";
         this.instance = instance;
     }
 
@@ -43,6 +53,9 @@ public class stepOneWorker implements Runnable
                 Double result = computeR(i, numberOfTaxa);
                 instance.addToRArray(i, result);
                 break;
+            case "FindNeighbors":
+                findAndCommitNeighborCandidates(i, distances);
+                break;
             case "N":
                 Double N = computeN(i, j);
                 //insert somewhere
@@ -61,6 +74,51 @@ public class stepOneWorker implements Runnable
 
         return result;
     }
+
+    public void findAndCommitNeighborCandidates(int i, double[] distances)
+    {
+        int neighbour1Position = 0;
+        int neighbour2Position = 0;
+        double approxDistance;
+        double smallestApproxDistance = Double.MAX_VALUE;
+
+        for (int j = 0; j < numberOfTaxa; j++)
+        {
+            if(i==j) continue;
+
+            approxDistance = distances[j];
+            if(approxDistance < smallestApproxDistance){
+                smallestApproxDistance = approxDistance;
+                neighbour1Position = i;
+                neighbour2Position = j;
+            }
+        }
+
+        instance.commitNeighborPair(neighbour1Position, neighbour2Position, smallestApproxDistance);
+        /*
+
+            neighbour1Position = 0;
+            neighbour2Position = 0;
+            double smallestApproxDistance = Double.MAX_VALUE;
+
+            for (int i = 0; i < numberOfTaxa; i++) {
+
+                //i
+                //approx[i]
+                for (int j = 0; j < numberOfTaxa; j++) {
+                    if(i==j) continue;
+                    double approxDistance = approxDistances[i][j];
+                    if(approxDistance < smallestApproxDistance){
+                        smallestApproxDistance = approxDistance;
+                        neighbour1Position = i;
+                        neighbour2Position = j;
+                    }
+                }
+            }
+         */
+
+    }
+
 
     public Double computeN(int i, int j) {
         return null;

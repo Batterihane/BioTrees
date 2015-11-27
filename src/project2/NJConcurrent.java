@@ -17,8 +17,14 @@ public class NJConcurrent
     private double[] r;
     private int rCounter;
 
-    double[][] approxDistances;
-    private int distanceCounter;
+    private int neighbour1Position;
+    private int neighbour2Position;
+
+    private double[][] approxDistances;
+
+
+    private double smallestApproxDistance;
+    private int commitedNeighborsCounter;
 
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
     private final Lock readLock = readWriteLock.readLock();
@@ -34,13 +40,24 @@ public class NJConcurrent
         writeLock.unlock();
     }
 
-    public void addToApproxDistances(int i, double value)
+
+    public double getSmallestApproxDistance()
     {
+        return smallestApproxDistance;
+    }
+
+    public void commitNeighborPair(int i, int j, double approxDistance) {
         writeLock.lock();
-        r[i] = value;
-        distanceCounter++;
+        if (approxDistance < this.smallestApproxDistance)
+        {
+            this.smallestApproxDistance = approxDistance;
+            neighbour1Position = i;
+            neighbour2Position = j;
+        }
+        commitedNeighborsCounter++;
         writeLock.unlock();
     }
+
 
     public HashMap<IntPair, Double> run(String[] leaves, double[][] distances){
         int numberOfLeaves = leaves.length;
@@ -95,9 +112,16 @@ public class NJConcurrent
             }
 
             // Find neighbours
-            int neighbour1Position = 0, neighbour2Position = 0;
-            double smallestApproxDistance = Double.MAX_VALUE;
+            neighbour1Position = 0;
+            neighbour2Position = 0;
+            commitedNeighborsCounter = 0;
+            smallestApproxDistance = Double.MAX_VALUE;
+
             for (int i = 0; i < numberOfTaxa; i++) {
+                Runnable worker = new stepOneWorker(i, approxDistances[i], numberOfTaxa, this);
+                executor.execute(worker);
+
+                /*
                 for (int j = 0; j < numberOfTaxa; j++) {
                     if(i==j) continue;
                     double approxDistance = approxDistances[i][j];
@@ -107,6 +131,12 @@ public class NJConcurrent
                         neighbour2Position = j;
                     }
                 }
+                */
+            }
+
+
+            while (commitedNeighborsCounter != numberOfTaxa) {
+                Thread.yield();
             }
 
             // Add new edges to tree
@@ -159,7 +189,7 @@ public class NJConcurrent
         double distance12 = dissimilarities.get(1).get(3);
         tree.put(new IntPair(newNode, dissimilarities.get(0).get(0).intValue()), (distance01+distance02-distance12)/2);
         tree.put(new IntPair(newNode, dissimilarities.get(1).get(0).intValue()), (distance01+distance12-distance02)/2);
-        tree.put(new IntPair(newNode, dissimilarities.get(2).get(0).intValue()), (distance02+distance12-distance01)/2);
+        tree.put(new IntPair(newNode, dissimilarities.get(2).get(0).intValue()), (distance02 + distance12 - distance01) / 2);
 
         return tree;
     }
@@ -205,7 +235,7 @@ public class NJConcurrent
         distances[4][4] = 0;
 
         long first = System.currentTimeMillis();
-        HashMap<IntPair, Double> tree = new NJConcurrent().run(leaves, distances);
+        HashMap<IntPair, Double> tree = new NJAlgorithm().run(leaves, distances);
         String[] names = {"A","B","C","D","E"};
         NewickMaker nm = new NewickMaker(names,tree);
         String result = nm.make();
