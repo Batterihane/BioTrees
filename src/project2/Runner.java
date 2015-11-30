@@ -25,7 +25,7 @@ public class Runner {
                 Tuple<double[][], String[]> phyllip = parser.parse();
 
                 long time = System.nanoTime();
-                HashMap<IntPair, Double> tree = new NJAlgorithm().run(phyllip.getRight(), phyllip.getLeft());
+                HashMap<IntPair, Double> tree = new NJOptimized().run(phyllip.getRight(), phyllip.getLeft());
                 System.out.println(filepath.getFileName().toString() + ": " + (System.nanoTime() - time));
 
                 NewickMaker newickMaker = new NewickMaker(phyllip.getRight(), tree);
@@ -91,15 +91,15 @@ public class Runner {
 //
 //        distances[4][4] = 0;
 
-//        PhyllipParser parser = new PhyllipParser(MATRICES_PATH + "1849_FG-GAP.phy");
+//        PhyllipParser parser = new PhyllipParser(MATRICES_PATH + "89_Adeno_E3_CR1.phy");
 //        Tuple<double[][], String[]> phyllip = parser.parse();
 //
 //
-//        HashMap<IntPair, Double> tree = new NJAlgorithm().run(phyllip.getRight(), phyllip.getLeft());
+//        HashMap<IntPair, Double> tree = new NJOptimized().run(phyllip.getRight(), phyllip.getLeft());
 //
 //        NewickMaker newickMaker = new NewickMaker(phyllip.getRight(), tree);
 //        String newickTree = newickMaker.make();
-//        NewickWriter newickWriter = new NewickWriter(TREES_PATH + "test");
+//        NewickWriter newickWriter = new NewickWriter("src//test.new");
 //        newickWriter.write(newickTree);
 
 //        String[] names = {"A","B","C","D","E"};
