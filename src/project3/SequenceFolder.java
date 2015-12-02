@@ -49,7 +49,7 @@ public class SequenceFolder {
         BitSet bool = new BitSet(1);
 
 
-        BitSet[] result = new BitSet[5]; //[evens1,evens2,odds1,odds2, 0=even1/odd2 1=odd1/even2]
+        BitSet[] result = new BitSet[4]; //[evens1,evens2,odds1,odds2, 0=even1/odd2 1=odd1/even2]
         for (int i = 0;i<Math.min(evens.length(),odds.length());i++){
             if (evens.get(i))
                 evenCount++;
@@ -63,8 +63,17 @@ public class SequenceFolder {
                 result[2] = odds.get(0,i+1);
                 result[3] = odds.get(i+1,evens.length());
                 bool.set(0,oddCount == (odds.cardinality()+1)/2); //true hvis vi bremsede på odds, false ellers
-                result[4] = bool;
-                return result;
+
+                //return result;
+                //code below trims result before returning it
+                if (bool.get(0)){
+                    BitSet[] res = {result[2], result[1],bool};
+                    return res;
+                }
+                else{
+                    BitSet[] res = {result[0],result[3],bool};
+                    return res;
+                }
 
             }
         }
