@@ -17,13 +17,17 @@ public class SequenceFolder {
         BitSet odds = new BitSet(n); //0=1, 1=3, 2=5 ...
 
         char[] inp = input.toCharArray();
-        for(int i=0;i<inp.length/2;i++){
+        if(inp.length%2==1&&inp[inp.length-1]=='h'){ //set last bit if vector is of uneven length
+                        evens.set(inp.length/2);
+        }
+        for(int i=0;i<inp.length/2;i++){ //do the rest
             if (inp[2*i]=='h')
                 evens.set(i);
-            if (inp[1+2*i]=='h') //hvis der er et lige antal vil det sidste odd check være ude over arrayet
+            if (inp[1+2*i]=='h')
                 odds.set(i);
         }
-
+        System.out.println(evens);
+        System.out.println(odds);
         return null;
     }
 }
