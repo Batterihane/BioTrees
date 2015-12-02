@@ -34,7 +34,11 @@ public class SequenceFolder {
 
 
         BitSet[] splits = split(evens, odds);
-
+        System.out.println(splits[0]);
+        System.out.println(splits[1]);
+        System.out.println(splits[2]);
+        System.out.println(splits[3]);
+        System.out.println(splits[4]);
 
 
         return null;
@@ -53,18 +57,19 @@ public class SequenceFolder {
             if (odds.get(i))
                 oddCount++;
 
-            if (evenCount == evens.length()-evens.length()/2 || oddCount == odds.length()-odds.length()/2){ //vi bremser på odds eller evens
-                result[0] = evens.get(0,i);
-                result[1] = evens.get(i+1,evens.length()-1);
-                result[2] = odds.get(0,i);
-                result[3] = odds.get(i+1,evens.length()-1);
-                bool.set(0,oddCount == odds.length()-odds.length()/2); //true hvis vi bremsede på odds, false hvis evens
+            if (evenCount == (evens.cardinality()+1)/2 || oddCount == (odds.cardinality()+1)/2){ //vi bremser på odds eller evens
+                result[0] = evens.get(0,i+1);
+                result[1] = evens.get(i+1,evens.length());
+                result[2] = odds.get(0,i+1);
+                result[3] = odds.get(i+1,evens.length());
+                bool.set(0,oddCount == (odds.cardinality()+1)/2); //true hvis vi bremsede på odds, false ellers
                 result[4] = bool;
+                return result;
 
             }
         }
-
-        return result;
+        System.out.println("det her burde aldrig ske!");
+        return null;
 
     }
 }
