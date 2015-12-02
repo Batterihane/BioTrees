@@ -51,10 +51,9 @@ public class FoldCreator {
         result += forward;
         result += duplicateString(levelDown, level);
         result += forward;
-        if(!isFirstSet)
+        if(isFirstSet)
             result += levelDown;
 
-        System.out.println(result);
         return result;
     }
 
