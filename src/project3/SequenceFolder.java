@@ -10,7 +10,6 @@ import java.util.List;
 public class SequenceFolder {
 
     public SequenceFolder(){}
-
     public String fold(String input){
         int n = input.length();
         BitSet evens = new BitSet(n); //index n is n'th even int. 0=0, 1=2, 2=4 etc.
