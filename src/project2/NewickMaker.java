@@ -44,7 +44,7 @@ public class NewickMaker {
     }
     public String makeRec(int node, int fromNode){
         if (node < noOfLeaves){ //return leaf node
-            return String.format(Locale.ENGLISH,"'%s':%f",names[node],map.get(new IntPair(node, fromNode)));
+            return String.format(Locale.ENGLISH,"'%s':%.80f",names[node],map.get(new IntPair(node, fromNode)));
         }   //return internal node
 
         int count = 0;
@@ -60,6 +60,6 @@ public class NewickMaker {
 
         }
 
-        return String.format(Locale.ENGLISH,"(%s,%s):%f",makeRec(otherNodes[0],node),makeRec(otherNodes[1],node),map.get(new IntPair(node, fromNode)));
+        return String.format(Locale.ENGLISH,"(%s,%s):%.80f",makeRec(otherNodes[0],node),makeRec(otherNodes[1],node),map.get(new IntPair(node, fromNode)));
     }
 }

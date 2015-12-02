@@ -50,7 +50,7 @@ public class Runner {
     }
 
     public static void main(String[] args) throws IOException {
-        runNJAlgorithm();
+   //     runNJAlgorithm();
 
 //        String[] leaves = new String[5];
 //        double[][] distances = new double[5][5];
@@ -91,11 +91,11 @@ public class Runner {
 //
 //        distances[4][4] = 0;
 
-//        PhyllipParser parser = new PhyllipParser(MATRICES_PATH + "89_Adeno_E3_CR1.phy");
-//        Tuple<double[][], String[]> phyllip = parser.parse();
-//
-//
-//        HashMap<IntPair, Double> tree = new NJOptimized().run(phyllip.getRight(), phyllip.getLeft());
+        PhyllipParser parser = new PhyllipParser(MATRICES_PATH + "1849_FG-GAP.phy");
+        Tuple<double[][], String[]> phyllip = parser.parse();
+
+
+        HashMap<IntPair, Double> tree = new NJOptimized().run(phyllip.getRight(), phyllip.getLeft());
 //
 //        NewickMaker newickMaker = new NewickMaker(phyllip.getRight(), tree);
 //        String newickTree = newickMaker.make();

@@ -87,7 +87,6 @@ public class NJOptimized {
 
             // Compute N matrixT
             time = System.currentTimeMillis();
-
             for (int i = 0; i < numberOfTaxa; i++) {
                 for (int j = i+1; j < numberOfTaxa; j++) {
                     approxDistances[i][j] = dissimilarities.get(i).get(j + 1) - (r[i] + r[j]);
