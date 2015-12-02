@@ -37,10 +37,9 @@ public class SequenceFolder {
         System.out.println(splits[0]);
         System.out.println(splits[1]);
         System.out.println(splits[2]);
-        System.out.println(splits[3]);
-        System.out.println(splits[4]);
 
-
+        String result = new FoldCreator().createFold(splits[0], splits[1], splits[2].get(0));
+        System.out.println(result);
         return null;
     }
 
