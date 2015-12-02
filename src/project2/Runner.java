@@ -21,18 +21,18 @@ public class Runner {
     public static void runNJAlgorithm() throws IOException {
         Files.walk(Paths.get(MATRICES_PATH)).forEach(filepath -> {
             if (!filepath.getFileName().toString().equals("distance_matrices")){
+                long time = System.nanoTime();
                 PhyllipParser parser = new PhyllipParser(filepath.toString());
                 Tuple<double[][], String[]> phyllip = parser.parse();
 
-                long time = System.nanoTime();
                 HashMap<IntPair, Double> tree = new NJOptimized().run(phyllip.getRight(), phyllip.getLeft());
-                System.out.println(filepath.getFileName().toString() + ": " + (System.nanoTime() - time));
 
                 NewickMaker newickMaker = new NewickMaker(phyllip.getRight(), tree);
                 String newickTree = newickMaker.make();
                 try {
                     NewickWriter newickWriter = new NewickWriter(TREES_PATH + filepath.getFileName().toString().replaceFirst(".phy", ".new"));
                     newickWriter.write(newickTree);
+                    System.out.println(filepath.getFileName().toString() + ": " + (System.nanoTime() - time));
                 } catch (Exception e) {
                     e.printStackTrace();
                 };

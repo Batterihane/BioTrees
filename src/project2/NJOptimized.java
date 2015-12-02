@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 
 public class NJOptimized {
-    long step1 = 0;
-    long step2 = 0;
-    long step3 = 0;
-    long step4 = 0;
-    long step5 = 0;
-    long time;
+//    long step1 = 0;
+//    long step2 = 0;
+//    long step3 = 0;
+//    long step4 = 0;
+//    long step5 = 0;
+//    long time;
 
     public NJOptimized(){
     }
@@ -45,7 +45,7 @@ public class NJOptimized {
             numberOfTaxa = dissimilarities.size();
 
             // Compute r list
-            time = System.currentTimeMillis();
+//            time = System.currentTimeMillis();
             if(isFirstIteration){
                 for (int i = 0; i < numberOfTaxa; i++) {
                     double distanceSum = 0;
@@ -83,19 +83,20 @@ public class NJOptimized {
                     r[i] = distanceSum / (double)(numberOfTaxa-2);
                 }
             }
-            step1 += System.currentTimeMillis()-time;
+//            step1 += System.currentTimeMillis()-time;
 
             // Compute N matrixT
-            time = System.currentTimeMillis();
+//            time = System.currentTimeMillis();
+
             for (int i = 0; i < numberOfTaxa; i++) {
                 for (int j = i+1; j < numberOfTaxa; j++) {
                     approxDistances[i][j] = dissimilarities.get(i).get(j + 1) - (r[i] + r[j]);
                 }
             }
-            step2 += System.currentTimeMillis()-time;
+//            step2 += System.currentTimeMillis()-time;
 
             // Find neighbours
-            time = System.currentTimeMillis();
+//            time = System.currentTimeMillis();
             int neighbour1Position = 0, neighbour2Position = 0;
             double smallestApproxDistance = Double.MAX_VALUE;
             for (int i = 0; i < numberOfTaxa; i++) {
@@ -109,9 +110,9 @@ public class NJOptimized {
                     }
                 }
             }
-            step3 += System.currentTimeMillis()-time;
+//            step3 += System.currentTimeMillis()-time;
 
-            time = System.currentTimeMillis();
+//            time = System.currentTimeMillis();
             // Add new edges to tree
             int newNode = numberOfNodes;
             double neighbourDistance = dissimilarities.get(neighbour1Position).get(neighbour2Position+1);
@@ -143,9 +144,9 @@ public class NJOptimized {
                 }
                 newNodeDistances.add((dissimilarities.get(neighbour1Position).get(m+1) + dissimilarities.get(neighbour2Position).get(m+1) - neighbourDistance) / 2);
             }
-            step4 += System.currentTimeMillis()-time;
+//            step4 += System.currentTimeMillis()-time;
 
-            time = System.currentTimeMillis();
+//            time = System.currentTimeMillis();
             dissimilarities.set(neighbour1Position, newNodeDistances);
             dissimilarities.remove(neighbour2Position);
             for (int i = 0; i < dissimilarities.size(); i++) {
@@ -159,7 +160,7 @@ public class NJOptimized {
             for (List<Double> l : dissimilarities){
                 l.remove(neighbour2Position+1);
             }
-            step5 += System.currentTimeMillis()-time;
+//            step5 += System.currentTimeMillis()-time;
         }
 
         // Combine tree
@@ -171,11 +172,11 @@ public class NJOptimized {
         tree.put(new IntPair(newNode, dissimilarities.get(1).get(0).intValue()), (distance01+distance12-distance02)/2);
         tree.put(new IntPair(newNode, dissimilarities.get(2).get(0).intValue()), (distance02+distance12-distance01)/2);
 
-        System.out.println("step 1: " + step1);
-        System.out.println("step 2: " + step2);
-        System.out.println("step 3: " + step3);
-        System.out.println("step 4: " + step4);
-        System.out.println("step 5: " + step5);
+//        System.out.println("step 1: " + step1);
+//        System.out.println("step 2: " + step2);
+//        System.out.println("step 3: " + step3);
+//        System.out.println("step 4: " + step4);
+//        System.out.println("step 5: " + step5);
         return tree;
     }
 
