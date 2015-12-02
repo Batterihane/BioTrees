@@ -28,6 +28,7 @@ public class SequenceFolder {
             if (inp[1+2*i]=='h')
                 odds.set(i);
         }
+
         System.out.println(evens);
         System.out.println(odds);
 
