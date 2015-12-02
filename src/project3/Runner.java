@@ -5,8 +5,8 @@ package project3;
  */
 public class Runner {
     public static void main(String[] args) {
-        SequenceFolder sf = new SequenceFolder();
-        sf.fold("hpphhhphphh");
-
+        ScoreFinder scofi = new ScoreFinder();
+        int i = scofi.findScore("hhphphphhph","nesswwnnne");
+        System.out.println(i);
     }
 }

@@ -34,11 +34,6 @@ public class SequenceFolder {
 
 
         BitSet[] splits = split(evens, odds);
-        System.out.println(splits[0]);
-        System.out.println(splits[1]);
-        System.out.println(splits[2]);
-        System.out.println(splits[3]);
-        System.out.println(splits[4]);
 
 
         return null;
