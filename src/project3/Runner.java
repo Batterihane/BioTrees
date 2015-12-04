@@ -8,27 +8,34 @@ import java.io.IOException;
  */
 public class Runner {
     public static void main(String[] args) {
+        new SequenceFolder().fold("hphpphhphpphphhpphph");
+
+
+//        runAll();
+    }
+
+    public static void runAll() {
         FileWriter fw=null;
         SequenceFolder sf = new SequenceFolder();
 
         String outp = "";
 
         String[] inps = {
-        "hhppppphhppphppphp",
-        "hphphhhppphhhhpphh",
-        "phpphphhhphhphhhhh",
-        "hphpphhphpphphhpphph",
-        "hhhpphphphpphphphpph",
-        "hhpphpphpphpphpphpphpphh",
-        "pphpphhpppphhpppphhpppphh",
-        "ppphhpphhppppphhhhhhhpphhpppphhpphpp",
-        "pphpphhpphhppppphhhhhhhhhhpppppphhpphhpphpphhhhh",
-        "hhphphphphhhhphppphppphpppphppphppphphhhhphphphphh",
-        "pphhhphhhhhhhhppphhhhhhhhhhphppphhhhhhhhhhhhpppphhhhhhphhphp",
-        "hhhhhhhhhhhhphphpphhpphhpphpphhpphhpphpphhpphhpphphphhhhhhhhhhhh",
-        "hhhhpppphhhhhhhhhhhhpppppphhhhhhhhhhhhppphhhhhhhhhhhhppphhhhhhhhhhhhppphpphhpphhpphph",
-        "pppppphphhppppphhhphhhhhphhpppphhpphhphhhhhphhhhhhhhhhphhphhhhhhhppppppppppphhhhhhhpphphhhpppppphphh",
-        "ppphhpphhhhpphhhphhphhphhhhpppppppphhhhhhpphhhhhhppppppppphphhphhhhhhhhhhhpphhhphhphpphphhhpppppphhh"};
+                "hhppppphhppphppphp",
+                "hphphhhppphhhhpphh",
+                "phpphphhhphhphhhhh",
+                "hphpphhphpphphhpphph",
+                "hhhpphphphpphphphpph",
+                "hhpphpphpphpphpphpphpphh",
+                "pphpphhpppphhpppphhpppphh",
+                "ppphhpphhppppphhhhhhhpphhpppphhpphpp",
+                "pphpphhpphhppppphhhhhhhhhhpppppphhpphhpphpphhhhh",
+                "hhphphphphhhhphppphppphpppphppphppphphhhhphphphphh",
+                "pphhhphhhhhhhhppphhhhhhhhhhphppphhhhhhhhhhhhpppphhhhhhphhphp",
+                "hhhhhhhhhhhhphphpphhpphhpphpphhpphhpphpphhpphhpphphphhhhhhhhhhhh",
+                "hhhhpppphhhhhhhhhhhhpppppphhhhhhhhhhhhppphhhhhhhhhhhhppphhhhhhhhhhhhppphpphhpphhpphph",
+                "pppppphphhppppphhhphhhhhphhpppphhpphhphhhhhphhhhhhhhhhphhphhhhhhhppppppppppphhhhhhhpphphhhpppppphphh",
+                "ppphhpphhhhpphhhphhphhphhhhpppppppphhhhhhpphhhhhhppppppppphphhphhhhhhhhhhhpphhhphhphpphphhhpppppphhh"};
 
         for(int i=0;i<inps.length;i++){
             outp+=(String.format("py -2 hpview.py %s %s > folds/%d.txt\n", inps[i],sf.fold(inps[i]),i));
@@ -45,9 +52,5 @@ public class Runner {
         }
         ScoreFinder scofi = new ScoreFinder();
         System.out.println(scofi.findScore(inps[12],sf.fold(inps[12])));
-
-
-
-
     }
 }

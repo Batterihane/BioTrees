@@ -15,7 +15,6 @@ public class SequenceFolder {
         BitSet evens = new BitSet(n); //index n is n'th even int. 0=0, 1=2, 2=4 etc.
         BitSet odds = new BitSet(n); //0=1, 1=3, 2=5 ...
 
-
         char[] inp = input.toCharArray();
         boolean evenLength = (inp.length%2==0);
 
@@ -30,6 +29,10 @@ public class SequenceFolder {
         }
 
         BitSet[] splits = split(evens, odds);
+        System.out.println(evens);
+        System.out.println(odds);
+        System.out.println(splits[0]);
+        System.out.println(splits[1]);
         System.out.println("First set is " + (splits[2].get(0) ? "odd" : "even"));
 
         String result = new FoldCreator().createFold(splits[0], splits[1], splits[2].get(0), evenLength);
@@ -58,11 +61,11 @@ public class SequenceFolder {
                 result[1] = evens.get(i+1,evens.length());
                 if(stoppedOnEven){
                     result[2] = odds.get(0,i);
-                    result[3] = odds.get(i,evens.length());
+                    result[3] = odds.get(i,odds.length());
                 }
                 else{
                     result[2] = odds.get(0,i+1);
-                    result[3] = odds.get(i+1,evens.length());
+                    result[3] = odds.get(i+1,odds.length());
                 }
                 bool.set(0,evenCount != (evens.cardinality()+1)/2); //true hvis vi bremsede på odds, false ellers
 
