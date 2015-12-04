@@ -29,13 +29,13 @@ public class SequenceFolder {
                 odds.set(i);
         }
 
-        System.out.println(evens);
-        System.out.println(odds);
-
-
         BitSet[] splits = split(evens, odds);
+        System.out.println(splits[0]);
+        System.out.println(splits[1]);
+        System.out.println("First set is " + (splits[2].get(0) ? "odd" : "even"));
 
-
+        String result = new FoldCreator().createFold(splits[0], splits[1], splits[2].get(0));
+        System.out.println(result);
         return null;
     }
 
@@ -52,12 +52,21 @@ public class SequenceFolder {
             if (odds.get(i))
                 oddCount++;
 
-            if (evenCount == (evens.cardinality()+1)/2 || oddCount == (odds.cardinality()+1)/2){ //vi bremser på odds eller evens
+
+            boolean stoppedOnEven = evenCount == (evens.cardinality() + 1) / 2;
+            boolean stoppedOnOdd = oddCount == (odds.cardinality() + 1) / 2;
+            if (stoppedOnEven || stoppedOnOdd){ //vi bremser på odds eller evens
                 result[0] = evens.get(0,i+1);
                 result[1] = evens.get(i+1,evens.length());
-                result[2] = odds.get(0,i+1);
-                result[3] = odds.get(i+1,evens.length());
-                bool.set(0,oddCount == (odds.cardinality()+1)/2); //true hvis vi bremsede på odds, false ellers
+                if(stoppedOnEven){
+                    result[2] = odds.get(0,i);
+                    result[3] = odds.get(i,evens.length());
+                }
+                else{
+                    result[2] = odds.get(0,i+1);
+                    result[3] = odds.get(i+1,evens.length());
+                }
+                bool.set(0,evenCount != (evens.cardinality()+1)/2); //true hvis vi bremsede på odds, false ellers
 
                 //return result;
                 //code below trims result before returning it
