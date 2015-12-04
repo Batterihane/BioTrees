@@ -7,14 +7,17 @@ import java.util.BitSet;
  */
 public class FoldCreator {
 
-    public String createFold(BitSet firstSet, BitSet secondSet, boolean isFirstSetOdds, boolean isSequenceLengthEven){
+    public String createFold(BitSet firstSet, BitSet secondSet, boolean isFirstSetOdds, int sequenceLength, int firstSplitLength){
+        boolean isSequenceLengthEven = (sequenceLength%2==0);
+        int secondSequenceLength = (sequenceLength - firstSplitLength * 2) + (isFirstSetOdds ? 0 : 1);
+        int secondSplitLength = (secondSequenceLength+1)/2;
         String result = "";
 
         if(isFirstSetOdds){
             result = "e";
         }
 
-        result += createFoldingPart(firstSet, true) + createFoldingPart(secondSet, false);
+        result += createFoldingPart(firstSet, true, firstSplitLength) + createFoldingPart(secondSet, false, secondSplitLength);
 
         if(isFirstSetOdds == isSequenceLengthEven)
             result += "w";
@@ -22,7 +25,7 @@ public class FoldCreator {
         return result;
     }
 
-    private String createFoldingPart(BitSet set, boolean isFirstSet) {
+    private String createFoldingPart(BitSet set, boolean isFirstSet, int splitLength) {
         String forward;
         String levelDown;
         String levelUp;
@@ -39,7 +42,7 @@ public class FoldCreator {
 
         String result = "";
         int level = 0;
-        for (int i = 1; i < set.length()-1; i++) {
+        for (int i = 1; i < splitLength-1; i++) {
             if(set.get(i)){
                 result += forward;
                 result += duplicateString(levelDown, level);

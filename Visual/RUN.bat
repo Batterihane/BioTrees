@@ -1,11 +1,11 @@
 py -2 hpview.py hhppppphhppphppphp essswnnwswnwswnww > folds/fold0_score1.txt
 py -2 hpview.py hphphhhppphhhhpphh eeeeeesswnwwwswnw > folds/fold1_score5.txt
 py -2 hpview.py phpphphhhphhphhhhh neseeeeeswwwwwwww > folds/fold2_score3.txt
-py -2 hpview.py hphpphhphpphphhpphph eenesesswnwww > folds/fold3_score3.txt
-py -2 hpview.py hhhpphphphpphphphpph eneseeesswnwwwwww > folds/fold4_score2.txt
+py -2 hpview.py hphpphhphpphphhpphph eenesesswnwwwswnwww > folds/fold3_score3.txt
+py -2 hpview.py hhhpphphphpphphphpph eneseeesswnwwwwwwww > folds/fold4_score2.txt
 py -2 hpview.py hhpphpphpphpphpphpphpphh nesennesseswwsswnnwswnw > folds/fold5_score3.txt
 py -2 hpview.py pphpphhpppphhpppphhpppphh enesennessessswnnwsswnnw > folds/fold6_score3.txt
-py -2 hpview.py ppphhpphhppppphhhhhhhpphhpppphhpphpp nesenesennesseeeswwswnwsswnnw > folds/fold7_score5.txt
+py -2 hpview.py ppphhpphhppppphhhhhhhpphhpppphhpphpp nesenesennesseeeswwswnwsswnnwswnwww > folds/fold7_score5.txt
 py -2 hpview.py pphpphhpphhppppphhhhhhhhhhpppppphhpphhpphpphhhhh eenesenesennesseeeeeeeswwssswnnnwswnwsswnnwwwww > folds/fold8_score15.txt
 py -2 hpview.py hhphphphphhhhphppphppphpppphppphppphphhhhphphphphh eeeeeeeeeeeswwswnwswnwssssssswnnnnnnnwwwwwwwwwwww > folds/fold9_score6.txt
 py -2 hpview.py pphhhphhhhhhhhppphhhhhhhhhhphppphhhhhhhhhhhhpppphhhhhhphhphp eeeneseeeeeeeneseeeeeeeeeswwswnwwwwwwwwwwwsswnnwwwwwswnwwww > folds/fold10_score17.txt

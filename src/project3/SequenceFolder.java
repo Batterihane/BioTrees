@@ -1,13 +1,12 @@
 package project3;
 
-import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.List;
 
 /**
  * Created by ballololz on 11/30/2015.
  */
 public class SequenceFolder {
+    private int firstSplitLength = -1;
 
     public SequenceFolder(){}
     public String fold(String input){
@@ -35,7 +34,7 @@ public class SequenceFolder {
         System.out.println(splits[1]);
         System.out.println("First set is " + (splits[2].get(0) ? "odd" : "even"));
 
-        String result = new FoldCreator().createFold(splits[0], splits[1], splits[2].get(0), evenLength);
+        String result = new FoldCreator().createFold(splits[0], splits[1], splits[2].get(0), inp.length, firstSplitLength);
         System.out.println(result);
         return result;
     }
@@ -65,10 +64,10 @@ public class SequenceFolder {
                 }
                 else{
                     result[2] = odds.get(0,i+1);
-                    result[3] = odds.get(i+1,odds.length());
+                    result[3] = odds.get(i + 1, odds.length());
                 }
                 bool.set(0,evenCount != (evens.cardinality()+1)/2); //true hvis vi bremsede på odds, false ellers
-
+                firstSplitLength = i+1;
                 //return result;
                 //code below trims result before returning it
                 if (bool.get(0)){
