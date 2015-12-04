@@ -30,11 +30,11 @@ public class Runner {
         for (int i = 0; i < input.length; i++) {
             String fold = sequenceFolder.fold(input[i]);
             int score = scoreFinder.findScore(input[i], fold);
-            foldsAndScores[i] = fold + ": " + score;
+            foldsAndScores[i] = fold + "-" + score;
         }
 
         for (int i = 0; i < input.length; i++) {
-            System.out.println("String " + (i+1) + ":"+ foldsAndScores[i]);
+            System.out.println( (i+1) + ": "+ input[i] + " " + foldsAndScores[i]);
         }
 
 
