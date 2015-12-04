@@ -7,7 +7,7 @@ import java.util.BitSet;
  */
 public class FoldCreator {
 
-    public String createFold(BitSet firstSet, BitSet secondSet, boolean isFirstSetOdds){
+    public String createFold(BitSet firstSet, BitSet secondSet, boolean isFirstSetOdds, boolean isSequenceLengthEven){
         String result = "";
 
         if(isFirstSetOdds){
@@ -15,6 +15,9 @@ public class FoldCreator {
         }
 
         result += createFoldingPart(firstSet, true) + createFoldingPart(secondSet, false);
+
+        if(isFirstSetOdds == isSequenceLengthEven)
+            result += "w";
 
         return result;
     }
@@ -48,9 +51,11 @@ public class FoldCreator {
                 level++;
             }
         }
-        result += forward;
-        result += duplicateString(levelDown, level);
-        result += forward;
+        if(set.length() != 1){
+            result += forward;
+            result += duplicateString(levelDown, level);
+            result += forward;
+        }
         if(isFirstSet)
             result += levelDown;
 
