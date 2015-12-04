@@ -1,0 +1,20 @@
+
+The folding eenesesswnwww has wrong length.
+
+Usage:
+
+hpview.py <seq> <fold>
+
+Displays  folding <fold> of sequence  <seq> in the  2D HP model, where
+<seq> is a string over the  alphabet {h,p} and  <fold> is a folding of
+<seq> in either relative or absolute format. The length of <fold> must
+be exactly one less than the length of <seq>.
+
+A folding in    relative format is   a sequence  over  {f,l,r},  which
+describes  the fold  as a sequence  of  steps  (f)orward, (l)left,  or
+(r)ight.
+
+A folding  in  absolute format  is  a  sequence  over {n,s,e,w}, which
+describes the  fold as a sequence of   steps to the  (n)orth, (s)outh,
+(e)east, or (w)est.              
+

@@ -31,21 +31,22 @@ public class Visual {
                 "pppppphphhppppphhhphhhhhphhpppphhpphhphhhhhphhhhhhhhhhphhphhhhhhhppppppppppphhhhhhhpphphhhpppppphphh",
                 "ppphhpphhhhpphhhphhphhphhhhpppppppphhhhhhpphhhhhhppppppppphphhphhhhhhhhhhhpphhhphhphpphphhhpppppphhh"};
 
+        ScoreFinder scofi = new ScoreFinder();
         for(int i=0;i<inps.length;i++){
-            outp+=(String.format("py -2 hpview.py %s %s > folds/%d.txt\n", inps[i],sf.fold(inps[i]),i));
+            String s = sf.fold(inps[i]);
+            outp+=(String.format("py -2 hpview.py %s %s > folds/fold%d_score%d.txt\n", inps[i],s,i,scofi.findScore(inps[i],s)));
 
         }
 
         try
         {
-            fw = new FileWriter("RUN.bat");
+            fw = new FileWriter("visual/RUN.bat");
             fw.write(outp);
             fw.close();
         }catch(IOException ioe){
             System.out.printf("ioerror");
         }
 
-        ScoreFinder scofi = new ScoreFinder();
 
         for (int i = 0;i<inps.length;i++)//print scores til sammenligning
             System.out.println("fold "+i+" score: "+ scofi.findScore(inps[i],sf.fold(inps[i])));
