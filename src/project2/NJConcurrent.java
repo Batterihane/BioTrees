@@ -30,7 +30,7 @@ public class NJConcurrent
     private final Lock readLock = readWriteLock.readLock();
     private final Lock writeLock = readWriteLock.writeLock();
 
-    private ExecutorService executor = Executors.newFixedThreadPool(10);
+    private ExecutorService executor = Executors.newFixedThreadPool(30);
 
     public void addToRArray(int i, double value)
     {
@@ -235,7 +235,7 @@ public class NJConcurrent
         distances[4][4] = 0;
 
         long first = System.currentTimeMillis();
-        HashMap<IntPair, Double> tree = new NJAlgorithm().run(leaves, distances);
+        HashMap<IntPair, Double> tree = new NJConcurrent().run(leaves, distances);
         String[] names = {"A","B","C","D","E"};
         NewickMaker nm = new NewickMaker(names,tree);
         String result = nm.make();

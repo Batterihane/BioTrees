@@ -36,7 +36,7 @@ public class SequenceFolder {
 
         String result = new FoldCreator().createFold(splits[0], splits[1], splits[2].get(0));
         System.out.println(result);
-        return null;
+        return result;
     }
 
     public BitSet[] split(BitSet evens, BitSet odds){
