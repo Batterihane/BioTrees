@@ -46,8 +46,9 @@ public class Visual {
         }
 
         ScoreFinder scofi = new ScoreFinder();
-        for (int i = 0;i<inps.length;i++)
-            System.out.println(scofi.findScore(inps[i],sf.fold(inps[i])));
+
+        for (int i = 0;i<inps.length;i++)//print scores til sammenligning
+            System.out.println("fold "+i+" score: "+ scofi.findScore(inps[i],sf.fold(inps[i])));
 
 
 
