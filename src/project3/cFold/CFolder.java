@@ -15,8 +15,8 @@ public class CFolder {
         String bestFold = "";
         for (int i = 0; i < input.length(); i++) {
             String fold = foldWithSplitIndex(input, i);
-            FoldValidator foldValidator = new FoldValidator(input, fold);
-            if(!foldValidator.validate()) continue;
+            FoldValidator foldValidator = new FoldValidator();
+            if(!foldValidator.validate(input, fold)) continue;
 
             int score = scoreFinder.findScore(input, fold);
             if(score > bestScore){

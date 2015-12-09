@@ -74,15 +74,17 @@ public class ImprovedSequenceFolder {
             }
         }
 
-        String firstResult = foldCreator.createFold(firstEvens, secondOdds, false, input.length(), firstLength, isReversed);
-        String secondResult = foldCreator.createFold(firstOdds, secondEvens, true, input.length(), firstLength, isReversed);
+        String result;
+        if(index%2 == 0){
+            result = foldCreator.createFold(firstOdds, secondEvens, true, input.length(), firstLength/2, isReversed);
+        }
+        else{
+            result = foldCreator.createFold(firstEvens, secondOdds, false, input.length(), (firstLength+1)/2, isReversed);
+        }
 
         ScoreFinder scoreFinder = new ScoreFinder();
-        int firstScore = scoreFinder.findScore(input, firstResult);
-        int secondScore = scoreFinder.findScore(input, secondResult);
-
-        bestSubScore = (firstScore > secondScore)? firstScore : secondScore;
-        return (firstScore > secondScore)? firstResult : secondResult;
+        bestSubScore = scoreFinder.findScore(input, result);
+        return result;
     }
 
 

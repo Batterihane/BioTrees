@@ -24,7 +24,9 @@ public class FoldCreator {
                 result = "e";
         }
 
-        result += createFoldingPart(firstSet, true, firstSplitLength, isReversed) + createFoldingPart(secondSet, false, secondSplitLength, isReversed);
+        String s1 = createFoldingPart(firstSet, true, firstSplitLength, isReversed);
+        String s2 = createFoldingPart(secondSet, false, secondSplitLength, isReversed);
+        result += s1 + s2;
 
         if(isFirstSetOdds == isSequenceLengthEven){
             if(isReversed)
