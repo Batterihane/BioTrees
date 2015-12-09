@@ -40,7 +40,7 @@ public class Visual {
 
         try
         {
-            fw = new FileWriter("visual/RUN.bat");
+            fw = new FileWriter("project3/visual/RUN.bat");
             fw.write(outp);
             fw.close();
         }catch(IOException ioe){

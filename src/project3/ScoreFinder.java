@@ -44,7 +44,7 @@ public class ScoreFinder {
 
 
                 //den her if scorer for j+1 som ikke har en tilsvarende værdi i fold.
-                // Man kan fjerne den og istedet fra starten appende en dummyværdi til fold.
+                // Man kan fjerne den og istedet fra starten appende en dummyværdi til fold. (er testet)
                 if(((iud-jud==0||ilr-jlr==0)&&(Math.abs(iud-jud)==1||Math.abs(ilr-jlr)==1))
                         &&hp.charAt(fold.length())=='h'
                         &&Math.abs(i-fold.length())>1){

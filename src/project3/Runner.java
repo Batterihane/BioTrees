@@ -11,7 +11,11 @@ public class Runner {
 //        new SequenceFolder().fold("hhhpphphphpphphphpph");
 
 
-        runAll();
+//        runAll();
+
+
+        ScoreFinder scofi = new ScoreFinder();
+        System.out.println(scofi.findScore("hhhpphphphpphphphpph","ssswnnnwwwseesswwne"));
     }
 
     public static void runAll() {
@@ -50,7 +54,5 @@ public class Runner {
         }catch(IOException ioe){
             System.out.printf("ioerror");
         }
-        ScoreFinder scofi = new ScoreFinder();
-        System.out.println(scofi.findScore(inps[12],sf.fold(inps[12])));
     }
 }
