@@ -6,15 +6,21 @@ public class FoldValidator
     String fold;
     String hpString;
 
-    public FoldValidator(String hpString, String fold) {
+    public FoldValidator() {
+    }
+
+    private void init(String hpString, String fold)
+    {
         int size = 2*fold.length() + 1;
         this.foldMatrix = new char[size][size];
         this.fold = fold;
         this.hpString = hpString;
     }
 
-    public boolean validate()
+    public boolean validate(String hpString, String fold)
     {
+        init(hpString, fold);
+
         if (hpString.length() != (fold.length()+1)) return false;
 
         int indexX = fold.length();
@@ -54,8 +60,8 @@ public class FoldValidator
 
         System.out.println((chars[5] == '\u0000'));
 
-        FoldValidator foldValidator = new FoldValidator("hhppppphhppphppphp", "eeeswnnnesseeesww");
-        System.out.println(foldValidator.validate());
+        FoldValidator foldValidator = new FoldValidator();
+        System.out.println(foldValidator.validate("hhppppphhppphppphp", "eeeswnnnesseeesww"));
 
     }
 }
