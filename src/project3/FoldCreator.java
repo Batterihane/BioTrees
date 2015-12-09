@@ -65,7 +65,7 @@ public class FoldCreator {
                 level++;
             }
         }
-        if(set.length() != 1){
+        if(splitLength != 1){
             result += forward;
             result += duplicateString(levelDown, level);
             result += forward;

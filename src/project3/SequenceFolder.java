@@ -30,6 +30,10 @@ public class SequenceFolder {
                 odds.set(i);
         }
 
+        if(evens.length() == 0 || odds.length() == 0){ // no h's can be matched
+            return new String(new char[n-1]).replace("\0", "s");
+        }
+
         BitSet[] splits = split(evens, odds);
         System.out.println(evens);
         System.out.println(odds);

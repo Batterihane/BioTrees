@@ -1,5 +1,7 @@
 package project3;
 
+import project3.cFold.CFolder;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -8,8 +10,9 @@ import java.io.IOException;
  */
 public class Runner {
     public static void main(String[] args) {
-        new SequenceFolder().fold("hhhpphphphpphphphpph", true);
-
+        String result = new SequenceFolder().fold("pppppp");
+//        String result = new CFolder().fold("hhhpphphphpphphphpph");
+        System.out.println(result);
 
         //runAll();
     }
