@@ -35,14 +35,9 @@ public class SequenceFolder {
         }
 
         BitSet[] splits = split(evens, odds);
-        System.out.println(evens);
-        System.out.println(odds);
-        System.out.println(splits[0]);
-        System.out.println(splits[1]);
         System.out.println("First set is " + (splits[2].get(0) ? "odd" : "even"));
 
         String result = new FoldCreator().createFold(splits[0], splits[1], splits[2].get(0), inp.length, firstSplitLength, isReversed);
-        System.out.println(result);
         return result;
     }
 

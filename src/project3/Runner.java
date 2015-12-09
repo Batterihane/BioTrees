@@ -10,9 +10,10 @@ import java.io.IOException;
  */
 public class Runner {
     public static void main(String[] args) {
-        String result = new SequenceFolder().fold("pppppp");
-//        String result = new CFolder().fold("hhhpphphphpphphphpph");
-        System.out.println(result);
+        String result1 = new SequenceFolder().fold("hhppppphhppphppphp");
+        String result2 = new CFolder().fold("hhppppphhppphppphp");
+        System.out.println(result1);
+        System.out.println(result2);
 
         //runAll();
     }
