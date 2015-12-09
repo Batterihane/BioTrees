@@ -83,7 +83,7 @@ public class SequenceFolder {
 
             }
         }
-        System.out.println("det her burde aldrig ske!");
+        System.out.println("Burde stadig aldrig ske!");
         return null;
 
     }

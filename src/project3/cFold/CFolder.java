@@ -1,6 +1,7 @@
 package project3.cFold;
 
 import project3.FoldValidator;
+import project3.ImprovedSequenceFolder;
 import project3.ScoreFinder;
 import project3.SequenceFolder;
 
@@ -29,7 +30,7 @@ public class CFolder {
     }
 
     private String foldWithSplitIndex(String input, int splitIndex) {
-        SequenceFolder uFolder = new SequenceFolder();
+        ImprovedSequenceFolder uFolder = new ImprovedSequenceFolder();
         if(splitIndex == 0){
             return uFolder.fold(input);
         }

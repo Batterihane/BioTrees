@@ -16,7 +16,7 @@ public class ImprovedSequenceFolder {
         return fold(input, false);
     }
 
-    private String fold(String input, boolean isReversed){
+    public String fold(String input, boolean isReversed){
         int currentlyBestScore = 0;
         String currentlyBestFold = "";
         for (int i = 1; i < input.length(); i++) {
@@ -29,7 +29,7 @@ public class ImprovedSequenceFolder {
         return currentlyBestFold;
     }
 
-    private String getBestSplitOnIndex(String input, int index, boolean isReversed) {
+    public String getBestSplitOnIndex(String input, int index, boolean isReversed) {
         FoldCreator foldCreator = new FoldCreator();
 
         String first = input.substring(0, index);
