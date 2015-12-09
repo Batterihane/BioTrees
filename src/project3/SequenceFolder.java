@@ -10,6 +10,9 @@ public class SequenceFolder {
 
     public SequenceFolder(){}
     public String fold(String input){
+        return fold(input, false);
+    }
+    public String fold(String input, boolean isReversed){
         int n = input.length();
         BitSet evens = new BitSet(n); //index n is n'th even int. 0=0, 1=2, 2=4 etc.
         BitSet odds = new BitSet(n); //0=1, 1=3, 2=5 ...
@@ -34,7 +37,7 @@ public class SequenceFolder {
         System.out.println(splits[1]);
         System.out.println("First set is " + (splits[2].get(0) ? "odd" : "even"));
 
-        String result = new FoldCreator().createFold(splits[0], splits[1], splits[2].get(0), inp.length, firstSplitLength);
+        String result = new FoldCreator().createFold(splits[0], splits[1], splits[2].get(0), inp.length, firstSplitLength, isReversed);
         System.out.println(result);
         return result;
     }

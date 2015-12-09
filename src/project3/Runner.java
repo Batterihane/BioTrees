@@ -8,10 +8,10 @@ import java.io.IOException;
  */
 public class Runner {
     public static void main(String[] args) {
-//        new SequenceFolder().fold("hhhpphphphpphphphpph");
+        new SequenceFolder().fold("hhhpphphphpphphphpph", true);
 
 
-        runAll();
+        //runAll();
     }
 
     public static void runAll() {

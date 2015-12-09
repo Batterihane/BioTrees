@@ -7,29 +7,40 @@ import java.util.BitSet;
  */
 public class FoldCreator {
 
-    public String createFold(BitSet firstSet, BitSet secondSet, boolean isFirstSetOdds, int sequenceLength, int firstSplitLength){
+    public String createFold(BitSet firstSet, BitSet secondSet, boolean isFirstSetOdds, int sequenceLength, int firstSplitLength) {
+        return createFold(firstSet, secondSet, isFirstSetOdds, sequenceLength, firstSplitLength, false);
+    }
+
+    public String createFold(BitSet firstSet, BitSet secondSet, boolean isFirstSetOdds, int sequenceLength, int firstSplitLength, boolean isReversed){
         boolean isSequenceLengthEven = (sequenceLength%2==0);
         int secondSequenceLength = (sequenceLength - firstSplitLength * 2) + (isFirstSetOdds ? 0 : 1);
         int secondSplitLength = (secondSequenceLength+1)/2;
         String result = "";
 
         if(isFirstSetOdds){
-            result = "e";
+            if(isReversed)
+                result = "w";
+            else
+                result = "e";
         }
 
-        result += createFoldingPart(firstSet, true, firstSplitLength) + createFoldingPart(secondSet, false, secondSplitLength);
+        result += createFoldingPart(firstSet, true, firstSplitLength, isReversed) + createFoldingPart(secondSet, false, secondSplitLength, isReversed);
 
-        if(isFirstSetOdds == isSequenceLengthEven)
-            result += "w";
+        if(isFirstSetOdds == isSequenceLengthEven){
+            if(isReversed)
+                result += "e";
+            else
+                result += "w";
+        }
 
         return result;
     }
 
-    private String createFoldingPart(BitSet set, boolean isFirstSet, int splitLength) {
+    private String createFoldingPart(BitSet set, boolean isFirstSet, int splitLength, boolean isReversed) {
         String forward;
         String levelDown;
         String levelUp;
-        if(isFirstSet){
+        if((isFirstSet && !isReversed) || (!isFirstSet && isReversed)){
             forward = "e";
             levelUp = "n";
             levelDown = "s";
