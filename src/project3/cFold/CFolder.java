@@ -1,5 +1,6 @@
 package project3.cFold;
 
+import project3.FoldValidator;
 import project3.ScoreFinder;
 import project3.SequenceFolder;
 
@@ -14,6 +15,9 @@ public class CFolder {
         String bestFold = "";
         for (int i = 0; i < input.length(); i++) {
             String fold = foldWithSplitIndex(input, i);
+            FoldValidator foldValidator = new FoldValidator(input, fold);
+            if(!foldValidator.validate()) continue;
+
             int score = scoreFinder.findScore(input, fold);
             if(score > bestScore){
                 bestScore = score;
