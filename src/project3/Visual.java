@@ -35,8 +35,10 @@ public class Visual {
 
         ScoreFinder scofi = new ScoreFinder();
         for(int i=0;i<inps.length;i++){
+
             String s = cfold.fold(inps[i]);
-            outp+=(String.format("py -2 hpview.py %s %s > C3folds/fold%d_score%d.txt\n", inps[i],s,i,scofi.findScore(inps[i],s)));
+            int score = scofi.findScore(inps[i],s);
+            outp+=(String.format("py -2 hpview.py %s %s > newfolds/fold%d_score%d.txt\n", inps[i],Abs2rel.convert(s),i+1,score));
 
         }
 
