@@ -1,0 +1,10 @@
+
+.   .   p - p   .   .   .   .   .   .   .   .   .   .  
+        |   |                                          
+p - p   p   p   p - p   .   .   .   .   .   .   .   .  
+|   |   |   |   |   |                                  
+h * H - h * H - h * H - p - p   p - p - p - H - h - p  
+|   *   *   *   *   *                       *   *   |  
+H - h - H - h - H - h - p - p - p - p - p - h - H - p  
+                                                       
+Score: 10
