@@ -1,0 +1,14 @@
+
+.   .   .   p - p   .  
+            |   |      
+.   h - p   h   p   .  
+    |   |   |   |      
+p - p   p - H   p - H  
+            *       |  
+.   h - H * h - H * h  
+        |   |   |   |  
+.   .   p   p   p   p  
+        |   |   |   |  
+.   .   p - p   p - p  
+                       
+Score: 3

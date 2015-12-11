@@ -1,0 +1,6 @@
+
+p - h - H - p - H - h - H - h - H  
+|   *   *       *           *      
+h - H - h - p - h - p - p - H - p  
+                                   
+Score: 4
